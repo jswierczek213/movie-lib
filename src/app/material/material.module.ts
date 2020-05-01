@@ -2,13 +2,15 @@ import { NgModule } from '@angular/core';
 import {
   MatButtonModule,
   MatDividerModule,
-  MatSidenavModule
+  MatSidenavModule,
+  MatIconModule
 } from '@angular/material';
 
 const material = [
   MatButtonModule,
   MatDividerModule,
-  MatSidenavModule
+  MatSidenavModule,
+  MatIconModule
 ];
 
 @NgModule({

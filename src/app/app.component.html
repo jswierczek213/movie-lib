@@ -1,29 +1,29 @@
+<!-- Navbar -->
 <div class="navbar">
   <div class="logo-container">
     <div class="logo"></div>
   </div>
   <div class="links-container">
-    <a>Strona główna</a>
-    <a>Filmy i seriale</a>
-    <a>Aktorzy</a>
-    <a>O nas</a>
+    <div *ngIf="!isSmallScreen; else showMenuIcon">
+      <a *ngFor="let link of links">{{ link.title }}</a>
+    </div>
+    <ng-template #showMenuIcon>
+      <button mat-icon-button (click)="sidenav.toggle()">
+        <mat-icon>menu</mat-icon>
+      </button>
+    </ng-template>
   </div>
 </div>
+
 <mat-sidenav-container>
-  <mat-sidenav class="sidenav" mode="over" position="end" opened fixedInViewport>
-    <div class="link-container">
-      <a>Strona główna</a>
-    </div>
-    <div class="link-container">
-      <a>Filmy i seriale</a>
-    </div>
-    <div class="link-container">
-      <a>Aktorzy</a>
-    </div>
-    <div class="link-container">
-      <a>O nas</a>
+  <!-- Sidenav -->
+  <mat-sidenav #sidenav class="sidenav" mode="over" position="end" fixedInViewport>
+    <div class="link-container" *ngFor="let link of links">
+      <a>{{ link.title }}</a>
     </div>
   </mat-sidenav>
+
+  <!-- Main content -->
   <mat-sidenav-content>
     <router-outlet></router-outlet>
   </mat-sidenav-content>
