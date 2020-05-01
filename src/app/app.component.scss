@@ -2,7 +2,7 @@
 
 .navbar {
   width: 100%;
-  padding: 15px;
+  padding: 10px 15px;
   display: flex;
   flex-flow: row nowrap;
   justify-content: space-between;
@@ -30,6 +30,38 @@
     a {
       display: inline-block;
       margin: 0 15px;
+
+      &:hover {
+        color: $hover-font;
+      }
+    }
+  }
+}
+
+.sidenav {
+  width: 20%;
+  height: 100%;
+  top: 80px !important;
+  background-color: $dark-background;
+  color: $light-font;
+  padding: 20px 0;
+  text-align: center;
+
+  @media ($tablet-screen) {
+    width: 40%;
+  }
+
+  @media ($mobile-screen) {
+    width: 50%;
+  }
+
+  .link-container {
+    padding: 20px 0;
+
+    a {
+      &:hover {
+        color: $hover-font;
+      }
     }
   }
 }

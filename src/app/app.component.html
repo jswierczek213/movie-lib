@@ -9,3 +9,22 @@
     <a>O nas</a>
   </div>
 </div>
+<mat-sidenav-container>
+  <mat-sidenav class="sidenav" mode="over" position="end" opened fixedInViewport>
+    <div class="link-container">
+      <a>Strona główna</a>
+    </div>
+    <div class="link-container">
+      <a>Filmy i seriale</a>
+    </div>
+    <div class="link-container">
+      <a>Aktorzy</a>
+    </div>
+    <div class="link-container">
+      <a>O nas</a>
+    </div>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>
