@@ -1,0 +1,35 @@
+@import "../assets/styles/variables.scss";
+
+.navbar {
+  width: 100%;
+  padding: 15px;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  align-content: center;
+  background-color: $dark-background;
+  color: $light-font;
+
+  .logo-container {
+    width: 200px;
+    height: 60px;
+
+    .logo {
+      width: 100%;
+      height: 100%;
+      background-color: #ff8000;
+    }
+  }
+
+  .links-container {
+    display: flex;
+    width: fit-content;
+    height: 60px;
+    align-items: center;
+
+    a {
+      display: inline-block;
+      margin: 0 15px;
+    }
+  }
+}
