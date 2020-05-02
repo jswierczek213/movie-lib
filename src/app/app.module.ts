@@ -11,11 +11,15 @@ import { MaterialModule } from './material/material.module';
 // Components & services
 import { AppComponent } from './app.component';
 import { MovieService } from './services/movie.service';
+import { HomeComponent } from './home/home.component';
+import { SearchBarComponent } from './search-bar/search-bar.component';
 
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    HomeComponent,
+    SearchBarComponent
   ],
   imports: [
     BrowserModule,

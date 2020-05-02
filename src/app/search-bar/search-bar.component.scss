@@ -1,0 +1,15 @@
+@import "../../assets/styles/variables.scss";
+
+.search-bar {
+  font-size: 15px;
+  padding: 10px 5px;
+}
+
+button {
+  border: 1px $dark-background solid;
+  margin-left: 10px;
+
+  &:hover {
+    background-color: $hover-font;
+  }
+}

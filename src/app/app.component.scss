@@ -10,6 +10,10 @@
   background-color: $dark-background;
   color: $light-font;
   border-bottom: 2px #3b3b3b solid;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 2;
 
   @media ($mobile-screen) {
     padding: 5px 10px;
@@ -87,5 +91,19 @@
         color: $hover-font;
       }
     }
+  }
+}
+
+.main-container {
+  width: 1000px;
+  margin: 82px auto 0 auto;
+  background-color: $light-background;
+
+  @media ($mobile-screen) {
+    margin: 57px auto 0 auto;
+  }
+
+  @media (max-width: 1000px) {
+    width: 100%;
   }
 }
