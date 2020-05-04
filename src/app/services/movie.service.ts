@@ -19,4 +19,8 @@ export class MovieService {
   getTrendingThisWeek() {
     return this.http.get(`${this.basicUrl}/trending/movie/week?api_key=${this.apiKey}&language=pl`);
   }
+
+  getMovieById(id: number) {
+    return this.http.get(`${this.basicUrl}/movie/${id}?api_key=${this.apiKey}&language=pl`);
+  }
 }

@@ -1,71 +1,69 @@
 <app-search-bar></app-search-bar>
+<app-loader *ngIf="showLoader"></app-loader>
 <div class="details-container">
   <div class="poster-container">
-    <img [src]="'http://image.tmdb.org/t/p/w342/tTTcCh8fmYxvw8GbSeECBlY1UwC.jpg'" alt="Plakat filmowy" />
+    <img [src]="posterBasicUrl + movie.poster_path" alt="Plakat filmowy" />
   </div>
   <div class="info-container">
-      <h2>Tyler Rake - Ocalenie</h2>
-      <h4>Oryginalny tytuł: Extraction</h4>
+      <h2> {{ movie.title }} </h2>
+      <h4> Oryginalny tytuł: {{ movie.original_title }} </h4>
       <mat-tab-group mat-align-tabs="center" dynamicHeight="true">
         <mat-tab label="Informacje">
           <div class="content-container">
             <div>
               <h4>Kraj produkcji</h4>
-              <span>Stany Zjednoczone</span>
+              <span> {{ movie.production_countries[0].name }} </span>
             </div>
             <div>
               <h4>Oryginalny język</h4>
-              <span>Angielski</span>
+              <span> {{ movie.original_language }} </span>
             </div>
             <div>
               <h4>Data publikacji</h4>
-              <span>24.05.2020</span>
+              <span> {{ movie.release_date }} </span>
             </div>
             <div>
               <h4>Czas trwania</h4>
-              <span>114 minut</span>
+              <span> {{ movie.runtime }} minut </span>
             </div>
             <div>
               <h4>Popularność</h4>
-              <span>356 790</span>
+              <span> {{ movie.popularity }} </span>
             </div>
             <div>
               <h4>Gatunki</h4>
               <div class="genres">
-                <span>Dramat</span>
-                <span>Akcja</span>
-                <span>Thriller</span>
+                <span *ngFor="let genre of movie.genres" > {{ genre.name }} </span>
               </div>
             </div>
             <div>
               <h4>Firmy produkcyjne</h4>
               <div class="genres">
-                <span>Marvel</span>
-                <span>DC</span>
+                <span *ngFor="let companie of movie.production_companies" > {{ companie.name }} </span>
               </div>
             </div>
             <div>
               <h4>Status</h4>
-              <span>Wydany</span>
+              <span> {{ movie.status }} </span>
             </div>
           </div>
         </mat-tab>
         <mat-tab label="Opis">
           <div class="content-container">
-            <p class="description">Doświadczony najemnik jedzie do Bangladeszu, by odnaleźć porwanego syna barona narkotykowego. Ta z pozoru zwykła misja szybko zmienia się w desperacką walkę o życie. Główną rolę w tym thrillerze gra Chris Hemsworth. Towarzyszą mu Rudhraksh Jaiswal, Randeep Hooda i Golshifteh Farahani.</p>
+            <p class="description"> {{ movie.overview }} </p>
           </div>
         </mat-tab>
         <mat-tab label="Ocena">
           <div class="content-container">
             <div>
-              <h4>Ocena ogólna</h4>
+              <h4>Średnia ocen</h4>
               <div class="genres">
-                <div class="score">8</div>
+                <div class="score"> {{ movie.vote_average }} </div>
               </div>
             </div>
             <div>
               <h4>Ilość oddanych głosów</h4>
-              <span>370 856</span>
+              <span> {{ movie.vote_count }} </span>
             </div>
           </div>
         </mat-tab>

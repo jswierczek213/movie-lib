@@ -17,7 +17,7 @@
           </div>
         </mat-card-content>
         <mat-card-actions class="btn-container">
-          <a>Więcej szczegółów</a>
+          <a [routerLink]="['/movie', movie.id]" [title]="'Szczegóły filmu ' + movie.title">Więcej szczegółów</a>
         </mat-card-actions>
       </mat-card>
 
@@ -45,7 +45,7 @@
           </div>
         </mat-card-content>
         <mat-card-actions class="btn-container">
-          <a>Więcej szczegółów</a>
+          <a [routerLink]="['/movie', movie.id]" [title]="'Szczegóły filmu ' + movie.title">Więcej szczegółów</a>
         </mat-card-actions>
       </mat-card>
 

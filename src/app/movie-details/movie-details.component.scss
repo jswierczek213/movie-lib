@@ -10,11 +10,23 @@
   flex-flow: row wrap;
 
   .poster-container {
-    width: 342px;
+    width: 300px;
+
+    @media (max-width: 1000px) {
+      margin: 0 auto 15px auto;
+    }
+
+    @media ($mobile-screen) {
+      width: 185px;
+    }
   }
 
   .info-container {
-    width: 618px;
+    width: 660px;
+
+    @media (max-width: 1000px) {
+      width: 100%;
+    }
 
     h2 {
       margin-top: 0;
