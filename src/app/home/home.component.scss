@@ -1,21 +1,5 @@
 @import "../../assets/styles/variables.scss";
 
-.search-bar-container {
-  width: 100%;
-  margin-top: 25px;
-  padding-bottom: 15px;
-  display: flex;
-  flex-flow: row wrap;
-  align-items: center;
-  justify-content: center;
-
-  h2 {
-    width: 100%;
-    text-align: center;
-    margin-top: 0;
-  }
-}
-
 .trending-container {
   width: 100%;
   padding: 25px 15px;
@@ -64,6 +48,7 @@
               color: $score;
               font-size: 20px;
               line-height: 30px;
+              text-align: center;
             }
           }
         }
@@ -83,6 +68,11 @@
           }
         }
       }
+    }
+
+    div.load-btn-container {
+      text-align: right;
+      padding: 15px 20px 15px 0;
     }
   }
 }

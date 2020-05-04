@@ -1,42 +1,58 @@
 @import "../../assets/styles/variables.scss";
 
-form {
+.search-bar-container {
+  width: 100%;
+  margin-top: 25px;
+  padding-bottom: 15px;
   display: flex;
+  flex-flow: row wrap;
+  align-items: center;
   justify-content: center;
-  align-content: flex-start;
 
-  label {
-    display: inline-block;
-    width: 300px;
-
-    @media ($mobile-screen) {
-      width: 200px;
-    }
-  }
-
-  .search-bar {
-    font-size: 15px;
-    padding: 10px 5px;
+  h2 {
     width: 100%;
+    text-align: center;
+    margin-top: 0;
   }
 
-  small {
-    display: block;
-    color: $warning;
-    letter-spacing: 1px;
-    margin: 5px 0 5px 5px;
-  }
+  form {
+    display: flex;
+    justify-content: center;
+    align-content: flex-start;
 
-  .invalid {
-    border: 1px solid $warning;
-  }
+    label {
+      display: inline-block;
+      width: 300px;
 
-  button {
-    border: 1px $dark-background solid;
-    margin-left: 10px;
+      @media ($mobile-screen) {
+        width: 200px;
+      }
+    }
 
-    &:hover {
-      background-color: $hover-font;
+    .search-bar {
+      font-size: 15px;
+      padding: 10px 5px;
+      width: 100%;
+    }
+
+    small {
+      display: block;
+      color: $warning;
+      letter-spacing: 1px;
+      margin: 5px 0 5px 5px;
+    }
+
+    .invalid {
+      border: 1px solid $warning;
+    }
+
+    button {
+      border: 1px $dark-background solid;
+      margin-left: 10px;
+
+      &:hover {
+        background-color: $hover-font;
+      }
     }
   }
 }

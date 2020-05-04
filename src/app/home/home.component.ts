@@ -19,8 +19,18 @@ export class HomeComponent implements OnInit {
   showDailyMoviesLoader = false;
   showWeeklyMoviesLoader = false;
 
+  maxDailyMovies = 3;
+  maxWeeklyMovies = 3;
+
   ngOnInit() {
     this.showDailyMoviesLoader = true;
+    this.getTrendingToday();
+
+    this.showWeeklyMoviesLoader = true;
+    this.getTrendingThisWeek();
+  }
+
+  getTrendingToday() {
     this.movieService.getTrendingToday()
     .pipe(
         map((data: TrendingMovies) => data.results),
@@ -36,8 +46,9 @@ export class HomeComponent implements OnInit {
           console.error(error);
         }
     );
+  }
 
-    this.showWeeklyMoviesLoader = true;
+  getTrendingThisWeek() {
     this.movieService.getTrendingThisWeek()
     .pipe(
       map((data: TrendingMovies) => data.results),
@@ -53,6 +64,14 @@ export class HomeComponent implements OnInit {
         console.error(error);
       }
     );
+  }
+
+  showAllDailyMovies() {
+    this.maxDailyMovies = 20;
+  }
+
+  showAllWeeklyMovies() {
+    this.maxWeeklyMovies = 20;
   }
 
 }
