@@ -41,6 +41,7 @@ export class HomeComponent implements OnInit {
     .subscribe(
         (result) => {
           this.dailyTrendingMovies = result;
+          console.log(result);
         },
         (error: HttpErrorResponse) => {
           console.error(error);
