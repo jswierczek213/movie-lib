@@ -1,0 +1,49 @@
+.container {
+  width: fit-content;
+  height: 30px;
+  display: flex;
+  justify-content: space-between;
+  align-content: center;
+  align-items: center;
+  flex-flow: row nowrap;
+  margin: 0 auto;
+
+  .element {
+    width: 30px;
+    height: 30px;
+    margin: 0 15px;
+    border-radius: 50%;
+    animation-name: resize;
+    animation-duration: 500ms;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-in-out;
+    animation-direction: alternate-reverse;
+  }
+
+  .left {
+    background-color: #3a3a3a;
+    animation-delay: 0ms;
+  }
+
+  .center {
+    background-color: #606060;
+    animation-delay: 300ms;
+  }
+
+  .right {
+    background-color: #3a3a3a;
+    animation-delay: 0ms;
+  }
+}
+
+@keyframes resize {
+  from {
+    width: 30px;
+    height: 30px;
+  }
+
+  to {
+    width: 10px;
+    height: 10px;
+  }
+}

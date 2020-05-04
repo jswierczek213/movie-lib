@@ -14,13 +14,15 @@ import { AppComponent } from './app.component';
 import { MovieService } from './services/movie.service';
 import { HomeComponent } from './home/home.component';
 import { SearchBarComponent } from './search-bar/search-bar.component';
+import { LoaderComponent } from './loader/loader.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    SearchBarComponent
+    SearchBarComponent,
+    LoaderComponent
   ],
   imports: [
     BrowserModule,
