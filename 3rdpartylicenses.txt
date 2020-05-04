@@ -95,6 +95,8 @@ THE SOFTWARE.
 
 @angular/material/sidenav
 
+@angular/material/tabs
+
 @angular/platform-browser
 MIT
 
