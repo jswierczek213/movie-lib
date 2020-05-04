@@ -7,13 +7,15 @@
     <h3>Popularne dzisiaj</h3>
     <mat-divider></mat-divider>
     <div class="movies-list">
-      <mat-card class="item-container">
-        <img mat-card-image />
+      <app-loader *ngIf="showDailyMoviesLoader"></app-loader>
+      <mat-card class="item-container" *ngFor="let movie of dailyTrendingMovies">
+        <img [src]="'https://image.tmdb.org/t/p/w500' + movie.backdrop_path"
+        alt="Obrazek przedstawiający film" mat-card-image />
         <mat-card-content class="basic-info-container">
-          <h3>Tytuł filmu</h3>
+          <h3> {{ movie.title }} </h3>
           <div class="rating-container">
             <span>Ocena ogólna</span>
-            <div class="score">7.5</div>
+            <div class="score"> {{ movie.vote_average }} </div>
           </div>
         </mat-card-content>
         <mat-card-actions class="btn-container">
@@ -26,13 +28,15 @@
     <h3>Popularne w tym tygodniu</h3>
     <mat-divider></mat-divider>
     <div class="movies-list">
-      <mat-card class="item-container">
-        <img mat-card-image />
+      <app-loader *ngIf="showWeeklyMoviesLoader"></app-loader>
+      <mat-card class="item-container" *ngFor="let movie of weeklyTrendingMovies">
+        <img [src]="'https://image.tmdb.org/t/p/w500' + movie.backdrop_path"
+        alt="Obrazek przedstawiający film" mat-card-image />
         <mat-card-content class="basic-info-container">
-          <h3>Tytuł filmu</h3>
+          <h3> {{ movie.title }} </h3>
           <div class="rating-container">
             <span>Ocena ogólna</span>
-            <div class="score">7.5</div>
+            <div class="score"> {{ movie.vote_average }} </div>
           </div>
         </mat-card-content>
         <mat-card-actions class="btn-container">
