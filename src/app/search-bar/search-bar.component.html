@@ -1,6 +1,14 @@
-<form>
-  <input type="text" class="search-bar" placeholder="endgame" />
-  <button mat-icon-button>
+<form [formGroup]="searchForm" novalidate autocomplete="off">
+  <label>
+    <input type="text" class="search-bar" [placeholder]="placeholder"
+  formControlName="query" [class.invalid]="query.invalid && enableErrors" />
+    <div *ngIf="query.invalid && enableErrors">
+      <small *ngIf="query.errors?.required">Pole nie może być puste</small>
+      <small *ngIf="query.errors?.minlength" >Pole musi zawierać minimum 2 znaki</small>
+      <small *ngIf="query.errors?.maxlength" >Pole może zawierać maksymalnie 45 znaków</small>
+    </div>
+  </label>
+  <button mat-icon-button type="submit" (click)="submit()">
     <mat-icon>search</mat-icon>
   </button>
 </form>

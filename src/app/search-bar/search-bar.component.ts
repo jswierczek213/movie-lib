@@ -12,6 +12,8 @@ export class SearchBarComponent implements OnInit {
 
   searchForm: FormGroup;
   submitted = false;
+  enableErrors = false;
+  placeholder = 'Szukaj filmu, serialu lub aktora';
 
   get query() {
     return this.searchForm.get('query');
@@ -19,8 +21,13 @@ export class SearchBarComponent implements OnInit {
 
   ngOnInit() {
     this.searchForm = this.fb.group(
-      {query: ['', [Validators.required]]}
+      {query: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(45)]]}
     );
+  }
+
+  submit(): void {
+    this.enableErrors = true;
+    // Send query below
   }
 
 }

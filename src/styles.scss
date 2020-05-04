@@ -15,4 +15,12 @@ body {
   font-family: Roboto, "Helvetica Neue", sans-serif;
   font-size: 16px;
   color: $dark-font;
+
+  @media ($mobile-screen) {
+    font-size: 15px;
+  }
+
+  h1, h2, h3 {
+    font-weight: 400;
+  }
 }
