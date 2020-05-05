@@ -3,7 +3,8 @@ import { BreakpointObserver } from '@angular/cdk/layout';
 import { ActivatedRoute } from '@angular/router';
 import { MovieService } from '../services/movie.service';
 import { HttpErrorResponse } from '@angular/common/http';
-import { finalize } from 'rxjs/operators';
+import { finalize, map } from 'rxjs/operators';
+import { MovieCredits } from '../interfaces/movie-credits';
 
 @Component({
   selector: 'app-movie-details',
@@ -19,7 +20,9 @@ export class MovieDetailsComponent implements OnInit, DoCheck {
     private movieService: MovieService) { }
 
   posterBasicUrl = 'http://image.tmdb.org/t/p/w300';
+  profileImageBasicUrl = 'http://image.tmdb.org/t/p/w185';
   movie;
+  movieCast: Array<any>;
 
   showLoader = false;
   allLoaded = false;
@@ -42,7 +45,22 @@ export class MovieDetailsComponent implements OnInit, DoCheck {
         this.notFound = true;
       },
       () => {
-        this.allLoaded = true;
+        // Get movie cast
+        this.movieService.getMovieCast(parseInt(id, 10))
+        .pipe(
+          map((data: MovieCredits) => data.cast)
+        )
+        .subscribe(
+          (cast) => {
+            this.movieCast = cast;
+          },
+          (error: HttpErrorResponse) => {
+            console.error(error);
+          },
+          () => {
+            this.allLoaded = true;
+          }
+        );
       }
     );
   }
@@ -50,8 +68,10 @@ export class MovieDetailsComponent implements OnInit, DoCheck {
   ngDoCheck() {
     if (this.breakpointObserver.isMatched('(max-width: 768px)')) {
       this.posterBasicUrl = 'http://image.tmdb.org/t/p/w185';
+      this.profileImageBasicUrl = 'http://image.tmdb.org/t/p/w45';
     } else {
       this.posterBasicUrl = 'http://image.tmdb.org/t/p/w300';
+      this.profileImageBasicUrl = 'http://image.tmdb.org/t/p/w185';
     }
   }
 

@@ -23,4 +23,8 @@ export class MovieService {
   getMovieById(id: number) {
     return this.http.get(`${this.basicUrl}/movie/${id}?api_key=${this.apiKey}&language=pl`);
   }
+
+  getMovieCast(id: number) {
+    return this.http.get(`${this.basicUrl}/movie/${id}/credits?api_key=${this.apiKey}`);
+  }
 }

@@ -22,9 +22,9 @@
       </mat-card>
 
     </div>
-    <ng-container *ngIf="maxDailyMovies === 3">
+    <ng-container *ngIf="maxDailyMovies < 20">
       <div class="load-btn-container">
-        <button mat-raised-button (click)="showAllDailyMovies()">Pokaż więcej</button>
+        <button mat-raised-button (click)="showMoreDailyMovies()">Pokaż więcej</button>
       </div>
     </ng-container>
   </div>
@@ -50,9 +50,9 @@
       </mat-card>
 
     </div>
-    <ng-container *ngIf="maxWeeklyMovies === 3">
+    <ng-container *ngIf="maxWeeklyMovies < 20">
       <div class="load-btn-container">
-        <button mat-raised-button (click)="showAllWeeklyMovies()">Pokaż więcej</button>
+        <button mat-raised-button (click)="showMoreWeeklyMovies()">Pokaż więcej</button>
       </div>
     </ng-container>
   </div>

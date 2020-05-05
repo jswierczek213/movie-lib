@@ -121,6 +121,76 @@
         }
       }
     }
+
+    .cast-container {
+
+      h3 {
+        text-align: center;
+        color: $score;
+      }
+
+      .list-container {
+        display: flex;
+        justify-content: space-around;
+        flex-flow: row wrap;
+        align-items: center;
+
+        .item {
+          width: 205px;
+          margin-top: 20px;
+          text-align: center;
+
+          @media ($mobile-screen) {
+            width: 150px;
+          }
+
+          h4 {
+            font-style: normal;
+            color: $light-font;
+          }
+
+          img {
+            width: 185px;
+            margin: 0 auto;
+
+            @media ($mobile-screen) {
+              width: 45px;
+            }
+          }
+
+          .image-placeholder {
+            width: 185px;
+            height: 278px;
+            line-height: 278px;
+            text-align: center;
+            margin: 0 auto;
+
+            @media ($mobile-screen) {
+              width: 45px;
+              height: 66px;
+              line-height: 66px;
+            }
+
+            .mat-icon {
+              width: 48px;
+              height: 48px;
+              font-size: 48px;
+
+              @media ($mobile-screen) {
+                width: 24px;
+                height: 24px;
+                font-size: 24px;
+              }
+            }
+          }
+
+          img, .image-placeholder {
+            border: 2px groove $score;
+          }
+        }
+      }
+    }
+
   }
 }
 

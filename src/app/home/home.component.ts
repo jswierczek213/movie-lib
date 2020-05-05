@@ -66,12 +66,20 @@ export class HomeComponent implements OnInit {
     );
   }
 
-  showAllDailyMovies() {
-    this.maxDailyMovies = 20;
+  showMoreDailyMovies() {
+    if (this.maxDailyMovies === 3) {
+      this.maxDailyMovies = 12;
+    } else {
+      this.maxDailyMovies = 20;
+    }
   }
 
-  showAllWeeklyMovies() {
-    this.maxWeeklyMovies = 20;
+  showMoreWeeklyMovies() {
+    if (this.maxWeeklyMovies === 3) {
+      this.maxWeeklyMovies = 12;
+    } else {
+      this.maxWeeklyMovies = 20;
+    }
   }
 
 }

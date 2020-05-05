@@ -72,6 +72,21 @@
           </div>
         </mat-tab>
       </mat-tab-group>
+      <div class="cast-container">
+        <h3>Obsada</h3>
+        <div class="list-container">
+          <div class="item" *ngFor="let person of movieCast" >
+            <img *ngIf="person.profile_path !== null; else showImagePlaceholder"
+            [src]="profileImageBasicUrl + person.profile_path"/>
+            <ng-template #showImagePlaceholder>
+              <div class="image-placeholder">
+                <mat-icon>face</mat-icon>
+              </div>
+            </ng-template>
+            <h4> {{ person.name }} </h4>
+          </div>
+        </div>
+      </div>
   </div>
 </div>
 <div *ngIf="notFound" class="not-found">

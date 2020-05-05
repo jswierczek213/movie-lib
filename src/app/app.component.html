@@ -19,7 +19,7 @@
   <!-- Sidenav -->
   <mat-sidenav #sidenav class="sidenav" mode="over" position="end" fixedInViewport>
     <div class="link-container" *ngFor="let link of links">
-      <a [routerLink]="link.link">{{ link.title }}</a>
+      <a [routerLink]="link.link" (click)="sidenav.toggle()">{{ link.title }}</a>
     </div>
   </mat-sidenav>
 
