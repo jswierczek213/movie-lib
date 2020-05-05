@@ -4,7 +4,6 @@ import { ActivatedRoute } from '@angular/router';
 import { MovieService } from '../services/movie.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { finalize, map } from 'rxjs/operators';
-import { MovieCredits } from '../interfaces/movie-credits';
 
 @Component({
   selector: 'app-movie-details',
@@ -70,7 +69,7 @@ export class MovieDetailsComponent implements OnInit, DoCheck {
 
     this.movieService.getMovieCast(this.movieId)
     .pipe(
-      map((data: MovieCredits) => data.cast),
+      map((data: any) => data.cast),
       finalize(() => {
         this.showCastLoader = false;
       })
@@ -101,7 +100,6 @@ export class MovieDetailsComponent implements OnInit, DoCheck {
     .subscribe(
       (results) => {
         this.movieVideos = results;
-        console.log(results);
       },
       (error: HttpErrorResponse) => {
         console.error(error);

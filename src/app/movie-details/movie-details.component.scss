@@ -2,15 +2,16 @@
 
 .details-container {
   width: 100%;
+  padding: 20px 15px 0 15px;
   background-color: $dark-background;
-  padding: 15px 20px;
   color: $light-font;
   display: flex;
   justify-content: space-between;
   flex-flow: row wrap;
+  border-bottom: 1px solid $light-background;
 
   .poster-container {
-    width: 300px;
+    width: 306px;
 
     @media (max-width: 1000px) {
       margin: 0 auto 15px auto;
@@ -26,7 +27,7 @@
   }
 
   .info-container {
-    width: 660px;
+    width: 654px;
 
     @media (max-width: 1000px) {
       width: 100%;
@@ -43,15 +44,7 @@
       text-align: center;
     }
 
-    .mat-tab-body {
-      min-height: 650px;
-    }
-
-    .mat-tab-label {
-      color: $score;
-    }
-
-    .mat-tab-label.mat-tab-label-active {
+    .mat-tab-label, .mat-tab-label.mat-tab-label-active {
       color: $score;
     }
 
@@ -142,6 +135,10 @@
     text-align: center;
     padding-bottom: 20px;
 
+    @media ($mobile-screen) {
+      width: 100%;
+    }
+
     h3 {
       color: $light-font;
     }
@@ -216,6 +213,10 @@
     text-align: center;
     padding-bottom: 20px;
     width: 500px;
+
+    @media ($mobile-screen) {
+      width: 100%;
+    }
 
     h3 {
       color: $light-font;

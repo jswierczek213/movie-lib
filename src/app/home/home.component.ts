@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { MovieService } from '../services/movie.service';
 import { map, finalize } from 'rxjs/operators';
 import { HttpErrorResponse } from '@angular/common/http';
-import { TrendingMovies } from '../interfaces/trending-movies';
 
 @Component({
   selector: 'app-home',
@@ -33,7 +32,7 @@ export class HomeComponent implements OnInit {
   getTrendingToday() {
     this.movieService.getTrendingToday()
     .pipe(
-        map((data: TrendingMovies) => data.results),
+        map((data: any) => data.results),
         finalize(() => {
           this.showDailyMoviesLoader = false;
         })
@@ -51,7 +50,7 @@ export class HomeComponent implements OnInit {
   getTrendingThisWeek() {
     this.movieService.getTrendingThisWeek()
     .pipe(
-      map((data: TrendingMovies) => data.results),
+      map((data: any) => data.results),
       finalize(() => {
         this.showWeeklyMoviesLoader = false;
       })
