@@ -27,4 +27,8 @@ export class MovieService {
   getMovieCast(id: number) {
     return this.http.get(`${this.basicUrl}/movie/${id}/credits?api_key=${this.apiKey}`);
   }
+
+  getMovieVideoInfo(id: number) {
+    return this.http.get(`${this.basicUrl}/movie/${id}/videos?api_key=${this.apiKey}`);
+  }
 }

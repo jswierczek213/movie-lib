@@ -44,7 +44,7 @@
     }
 
     .mat-tab-body {
-      min-height: 600px;
+      min-height: 650px;
     }
 
     .mat-tab-label {
@@ -131,6 +131,10 @@
       padding-bottom: 20px;
 
       h3 {
+        color: $light-font;
+      }
+
+      button {
         color: $score;
       }
 
@@ -191,6 +195,37 @@
 
           img, .image-placeholder {
             border: 2px groove $score;
+          }
+        }
+      }
+    }
+
+    .video-container {
+      text-align: center;
+      padding-bottom: 20px;
+
+      h3 {
+        color: $light-font;
+      }
+
+      button {
+        color: $score;
+      }
+
+      div.item-container {
+        width: 100%;
+        margin: 20px 0 60px 0;
+
+        h4 {
+          color: $score;
+        }
+
+        iframe {
+          width: 80%;
+          margin: 0 auto;
+
+          @media ($mobile-screen) {
+            width: 100%;
           }
         }
       }

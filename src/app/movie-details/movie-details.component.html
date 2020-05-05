@@ -89,6 +89,18 @@
           </div>
         </div>
       </div>
+      <div class="video-container">
+        <h3>Zwiastun</h3>
+        <button *ngIf="movieVideos.length === 0"  (click)="loadMovies()" mat-stroked-button>Wyświetl</button>
+        <app-loader *ngIf="showVideoLoader"></app-loader>
+        <div *ngIf="movieVideos.length > 0" >
+          <div class="item-container" *ngFor="let video of movieVideos">
+            <h4> {{ video.name }} </h4>
+            <iframe width="560" height="315" [src]="'https://www.youtube.com/embed/' + video.key | safe" allowfullscreen>
+            </iframe>
+          </div>
+        </div>
+      </div>
   </div>
 </div>
 <div *ngIf="notFound" class="not-found">

@@ -23,10 +23,12 @@ export class MovieDetailsComponent implements OnInit, DoCheck {
   profileImageBasicUrl = 'http://image.tmdb.org/t/p/w185';
   movie;
   movieCast: Array<any> = [];
+  movieVideos: Array<any> = [];
   movieId: number;
 
   showMainLoader = false;
   showCastLoader = false;
+  showVideoLoader = false;
   allLoaded = false;
   notFound = false;
 
@@ -82,6 +84,27 @@ export class MovieDetailsComponent implements OnInit, DoCheck {
       },
       () => {
         this.allLoaded = true;
+      }
+    );
+  }
+
+  loadMovies() {
+    this.showVideoLoader = true;
+
+    this.movieService.getMovieVideoInfo(this.movieId)
+    .pipe(
+      map((data: any) => data.results),
+      finalize(() => {
+        this.showVideoLoader = false;
+      })
+    )
+    .subscribe(
+      (results) => {
+        this.movieVideos = results;
+        console.log(results);
+      },
+      (error: HttpErrorResponse) => {
+        console.error(error);
       }
     );
   }
