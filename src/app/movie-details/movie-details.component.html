@@ -72,35 +72,37 @@
           </div>
         </mat-tab>
       </mat-tab-group>
-      <div class="cast-container">
-        <h3>Obsada</h3>
-        <button *ngIf="movieCast.length === 0" (click)="loadCast()" mat-stroked-button>Wyświetl</button>
-        <app-loader *ngIf="showCastLoader"></app-loader>
-        <div class="list-container" *ngIf="movieCast.length > 0" >
-          <div class="item" *ngFor="let person of movieCast" >
-            <img *ngIf="person.profile_path !== null; else showImagePlaceholder"
-            [src]="profileImageBasicUrl + person.profile_path"/>
-            <ng-template #showImagePlaceholder>
-              <div class="image-placeholder">
-                <mat-icon>face</mat-icon>
-              </div>
-            </ng-template>
-            <h4> {{ person.name }} </h4>
+  </div>
+</div>
+<div class="additional-info">
+  <div class="cast-container">
+    <h3>Obsada</h3>
+    <button *ngIf="movieCast.length === 0" (click)="loadCast()" mat-stroked-button>Wyświetl</button>
+    <app-loader *ngIf="showCastLoader"></app-loader>
+    <div class="list-container" *ngIf="movieCast.length > 0" >
+      <div class="item" *ngFor="let person of movieCast" >
+        <img *ngIf="person.profile_path !== null; else showImagePlaceholder"
+        [src]="profileImageBasicUrl + person.profile_path"/>
+        <ng-template #showImagePlaceholder>
+          <div class="image-placeholder">
+            <mat-icon>face</mat-icon>
           </div>
-        </div>
+        </ng-template>
+        <h4> {{ person.name }} </h4>
       </div>
-      <div class="video-container">
-        <h3>Zwiastun</h3>
-        <button *ngIf="movieVideos.length === 0"  (click)="loadMovies()" mat-stroked-button>Wyświetl</button>
-        <app-loader *ngIf="showVideoLoader"></app-loader>
-        <div *ngIf="movieVideos.length > 0" >
-          <div class="item-container" *ngFor="let video of movieVideos">
-            <h4> {{ video.name }} </h4>
-            <iframe width="560" height="315" [src]="'https://www.youtube.com/embed/' + video.key | safe" allowfullscreen>
-            </iframe>
-          </div>
-        </div>
+    </div>
+  </div>
+  <div class="video-container">
+    <h3>Zwiastun</h3>
+    <button *ngIf="movieVideos.length === 0"  (click)="loadMovies()" mat-stroked-button>Wyświetl</button>
+    <app-loader *ngIf="showVideoLoader"></app-loader>
+    <div *ngIf="movieVideos.length > 0" >
+      <div class="item-container" *ngFor="let video of movieVideos">
+        <h4> {{ video.name }} </h4>
+        <iframe width="560" height="315" [src]="'https://www.youtube.com/embed/' + video.key | safe" allowfullscreen>
+        </iframe>
       </div>
+    </div>
   </div>
 </div>
 <div *ngIf="notFound" class="not-found">
