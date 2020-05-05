@@ -39,6 +39,10 @@
       text-align: center;
     }
 
+    .mat-tab-body {
+      min-height: 600px;
+    }
+
     .mat-tab-label {
       color: $score;
     }
@@ -55,10 +59,18 @@
       width: 100%;
       padding: 20px;
 
+      @media ($mobile-screen) {
+        padding: 10px;
+      }
+
       p.description {
         line-height: 28px;
         font-size: 16px;
         text-align: justify;
+
+        @media ($mobile-screen) {
+          text-align: left;
+        }
       }
 
       div {
@@ -109,5 +121,15 @@
         }
       }
     }
+  }
+}
+
+.not-found {
+  padding: 15px;
+  text-align: center;
+  color: $warning;
+
+  a {
+    color: $dark-font;
   }
 }

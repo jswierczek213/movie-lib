@@ -22,6 +22,8 @@ export class MovieDetailsComponent implements OnInit, DoCheck {
   movie;
 
   showLoader = false;
+  allLoaded = false;
+  notFound = false;
 
   ngOnInit() {
     this.showLoader = true;
@@ -37,6 +39,10 @@ export class MovieDetailsComponent implements OnInit, DoCheck {
       },
       (error: HttpErrorResponse) => {
         console.error(error);
+        this.notFound = true;
+      },
+      () => {
+        this.allLoaded = true;
       }
     );
   }

@@ -1,13 +1,13 @@
 <app-search-bar></app-search-bar>
 <app-loader *ngIf="showLoader"></app-loader>
-<div class="details-container">
+<div *ngIf="allLoaded"  class="details-container">
   <div class="poster-container">
     <img [src]="posterBasicUrl + movie.poster_path" alt="Plakat filmowy" />
   </div>
   <div class="info-container">
       <h2> {{ movie.title }} </h2>
       <h4> Oryginalny tytuł: {{ movie.original_title }} </h4>
-      <mat-tab-group mat-align-tabs="center" dynamicHeight="true">
+      <mat-tab-group mat-align-tabs="center">
         <mat-tab label="Informacje">
           <div class="content-container">
             <div>
@@ -46,6 +46,10 @@
               <h4>Status</h4>
               <span> {{ movie.status }} </span>
             </div>
+            <div>
+              <h4>Budżet</h4>
+              <span> {{ movie.budget }} </span>
+            </div>
           </div>
         </mat-tab>
         <mat-tab label="Opis">
@@ -69,4 +73,8 @@
         </mat-tab>
       </mat-tab-group>
   </div>
+</div>
+<div *ngIf="notFound" class="not-found">
+  <h2>Nie znaleziono filmu o podanym ID</h2>
+  <a routerLink="/">Wróć na stronę główną</a>
 </div>
