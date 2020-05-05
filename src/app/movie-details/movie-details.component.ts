@@ -22,19 +22,22 @@ export class MovieDetailsComponent implements OnInit, DoCheck {
   posterBasicUrl = 'http://image.tmdb.org/t/p/w300';
   profileImageBasicUrl = 'http://image.tmdb.org/t/p/w185';
   movie;
-  movieCast: Array<any>;
+  movieCast: Array<any> = [];
+  movieId: number;
 
-  showLoader = false;
+  showMainLoader = false;
+  showCastLoader = false;
   allLoaded = false;
   notFound = false;
 
   ngOnInit() {
-    this.showLoader = true;
+    this.showMainLoader = true;
     const id = this.route.snapshot.paramMap.get('id');
+    this.movieId = parseInt(id, 10);
 
-    this.movieService.getMovieById(parseInt(id, 10)).pipe(
+    this.movieService.getMovieById(this.movieId).pipe(
       finalize(() => {
-        this.showLoader = false;
+        this.showMainLoader = false;
       })
     ).subscribe(
       (result) => {
@@ -45,22 +48,7 @@ export class MovieDetailsComponent implements OnInit, DoCheck {
         this.notFound = true;
       },
       () => {
-        // Get movie cast
-        this.movieService.getMovieCast(parseInt(id, 10))
-        .pipe(
-          map((data: MovieCredits) => data.cast)
-        )
-        .subscribe(
-          (cast) => {
-            this.movieCast = cast;
-          },
-          (error: HttpErrorResponse) => {
-            console.error(error);
-          },
-          () => {
-            this.allLoaded = true;
-          }
-        );
+        this.allLoaded = true;
       }
     );
   }
@@ -73,6 +61,29 @@ export class MovieDetailsComponent implements OnInit, DoCheck {
       this.posterBasicUrl = 'http://image.tmdb.org/t/p/w300';
       this.profileImageBasicUrl = 'http://image.tmdb.org/t/p/w185';
     }
+  }
+
+  loadCast() {
+    this.showCastLoader = true;
+
+    this.movieService.getMovieCast(this.movieId)
+    .pipe(
+      map((data: MovieCredits) => data.cast),
+      finalize(() => {
+        this.showCastLoader = false;
+      })
+    )
+    .subscribe(
+      (cast) => {
+        this.movieCast = cast;
+      },
+      (error: HttpErrorResponse) => {
+        console.error(error);
+      },
+      () => {
+        this.allLoaded = true;
+      }
+    );
   }
 
 }
