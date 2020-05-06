@@ -24,12 +24,15 @@ export class MovieDetailsComponent implements OnInit, DoCheck {
   movieCast: Array<any> = [];
   movieVideos: Array<any> = [];
   movieId: number;
+  maxMoviesCount = 3;
 
   showMainLoader = false;
   showCastLoader = false;
   showVideoLoader = false;
   allLoaded = false;
   notFound = false;
+  showCastButton = true;
+  showMoviesButton = true;
 
   ngOnInit() {
     this.showMainLoader = true;
@@ -57,15 +60,16 @@ export class MovieDetailsComponent implements OnInit, DoCheck {
   ngDoCheck() {
     if (this.breakpointObserver.isMatched('(max-width: 768px)')) {
       this.posterBasicUrl = 'http://image.tmdb.org/t/p/w185';
-      this.profileImageBasicUrl = 'http://image.tmdb.org/t/p/w45';
+      // this.profileImageBasicUrl = 'http://image.tmdb.org/t/p/w45';
     } else {
       this.posterBasicUrl = 'http://image.tmdb.org/t/p/w300';
-      this.profileImageBasicUrl = 'http://image.tmdb.org/t/p/w185';
+      // this.profileImageBasicUrl = 'http://image.tmdb.org/t/p/w185';
     }
   }
 
   loadCast() {
     this.showCastLoader = true;
+    this.showCastButton = false;
 
     this.movieService.getMovieCast(this.movieId)
     .pipe(
@@ -89,6 +93,7 @@ export class MovieDetailsComponent implements OnInit, DoCheck {
 
   loadMovies() {
     this.showVideoLoader = true;
+    this.showMoviesButton = false;
 
     this.movieService.getMovieVideoInfo(this.movieId)
     .pipe(
@@ -105,6 +110,10 @@ export class MovieDetailsComponent implements OnInit, DoCheck {
         console.error(error);
       }
     );
+  }
+
+  loadMoreVideos() {
+    this.maxMoviesCount = this.movieVideos.length;
   }
 
 }

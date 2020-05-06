@@ -155,11 +155,14 @@
 
       .item {
         width: 205px;
+        height: 360px;
         margin-top: 20px;
         text-align: center;
 
         @media ($mobile-screen) {
           width: 150px;
+          height: 310px;
+          margin-top: 25px;
         }
 
         h4 {
@@ -172,7 +175,7 @@
           margin: 0 auto;
 
           @media ($mobile-screen) {
-            width: 45px;
+            width: 150px;
           }
         }
 
@@ -184,9 +187,9 @@
           margin: 0 auto;
 
           @media ($mobile-screen) {
-            width: 45px;
-            height: 66px;
-            line-height: 66px;
+            width: 150px;
+            height: 224px;
+            line-height: 224px;
           }
 
           .mat-icon {
@@ -195,9 +198,9 @@
             font-size: 48px;
 
             @media ($mobile-screen) {
-              width: 24px;
-              height: 24px;
-              font-size: 24px;
+              width: 36px;
+              height: 36px;
+              font-size: 36px;
             }
           }
         }
@@ -237,6 +240,16 @@
       iframe {
         width: 90%;
         margin: 0 auto;
+      }
+    }
+
+    div {
+
+      a {
+        font-size: 15px;
+        color: $score;
+        text-decoration: underline;
+        cursor: pointer;
       }
     }
   }
