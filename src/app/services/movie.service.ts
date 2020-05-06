@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -22,6 +23,16 @@ export class MovieService {
 
   getMovieById(id: number) {
     return this.http.get(`${this.basicUrl}/movie/${id}?api_key=${this.apiKey}&language=pl`);
+  }
+
+  getMovieEngDescription(id: number) {
+    return this.http.get(`${this.basicUrl}/movie/${id}/translations?api_key=${this.apiKey}`)
+    .pipe(
+      map((data: any) => data.translations)
+    )
+    .pipe(
+      map(translations => translations.filter(transl => transl.name === 'English'))
+    );
   }
 
   getMovieCast(id: number) {

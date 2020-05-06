@@ -54,7 +54,16 @@
         </mat-tab>
         <mat-tab label="Opis">
           <div class="content-container">
-            <p class="description"> {{ movie.overview }} </p>
+            <p class="description" *ngIf="movie.overview.length > 0; else showNoPolishDescription">
+              {{ movie.overview }}
+            </p>
+            <ng-template #showNoPolishDescription>
+              <div class="no-polish-description">
+                <p>Brak polskiej wersji opisu!</p>
+                <a (click)="loadEnglishDescription()">Pokaż opis w języku angielskim</a>
+              </div>
+              <app-loader *ngIf="this.showDescriptionLoader"></app-loader>
+            </ng-template>
           </div>
         </mat-tab>
         <mat-tab label="Ocena">

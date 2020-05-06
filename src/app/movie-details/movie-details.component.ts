@@ -25,10 +25,12 @@ export class MovieDetailsComponent implements OnInit, DoCheck {
   movieVideos: Array<any> = [];
   movieId: number;
   maxMoviesCount = 3;
+  englishDescription: string;
 
   showMainLoader = false;
   showCastLoader = false;
   showVideoLoader = false;
+  showDescriptionLoader = false;
   allLoaded = false;
   notFound = false;
   showCastButton = true;
@@ -114,6 +116,29 @@ export class MovieDetailsComponent implements OnInit, DoCheck {
 
   loadMoreVideos() {
     this.maxMoviesCount = this.movieVideos.length;
+  }
+
+  loadEnglishDescription() {
+    this.showDescriptionLoader = true;
+
+    this.movieService.getMovieEngDescription(this.movieId)
+    .pipe(
+      map((result: any) => result[0].data.overview),
+      finalize(() => {
+        this.showDescriptionLoader = false;
+      })
+    )
+    .subscribe(
+      (result) => {
+        this.englishDescription = result;
+      },
+      (error: HttpErrorResponse) => {
+        console.error(error);
+      },
+      () => {
+        this.movie.overview = this.englishDescription;
+      }
+    );
   }
 
 }

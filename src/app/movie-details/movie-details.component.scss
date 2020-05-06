@@ -70,6 +70,18 @@
         }
       }
 
+      div.no-polish-description {
+        text-align: center;
+        display: block;
+
+        a {
+          font-size: 15px;
+          color: $score;
+          text-decoration: underline;
+          cursor: pointer;
+        }
+      }
+
       div {
         display: flex;
         justify-content: space-around;
