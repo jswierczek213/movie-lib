@@ -18,6 +18,8 @@ import { LoaderComponent } from './loader/loader.component';
 import { MovieDetailsComponent } from './movie-details/movie-details.component';
 import { SafePipe } from './safe.pipe';
 import { MoviesAndTvComponent } from './movie-and-tv/movie-and-tv.component';
+import { SearchResultsComponent } from './search-results/search-results.component';
+import { SearchService } from './services/search.service';
 
 
 @NgModule({
@@ -28,7 +30,8 @@ import { MoviesAndTvComponent } from './movie-and-tv/movie-and-tv.component';
     LoaderComponent,
     MovieDetailsComponent,
     SafePipe,
-    MoviesAndTvComponent
+    MoviesAndTvComponent,
+    SearchResultsComponent
   ],
   imports: [
     BrowserModule,
@@ -38,7 +41,10 @@ import { MoviesAndTvComponent } from './movie-and-tv/movie-and-tv.component';
     ReactiveFormsModule,
     HttpClientModule
   ],
-  providers: [MovieService],
+  providers: [
+    MovieService,
+    SearchService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

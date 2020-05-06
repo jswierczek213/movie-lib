@@ -24,6 +24,23 @@
     img {
       border: 3px groove $score;
     }
+
+    .poster-placeholder {
+      width: 306px;
+      height: 456px;
+      border: 2px solid $score;
+      margin: 0 auto;
+      color: $warning;
+      line-height: 456px;
+      text-align: center;
+      font-size: 20px;
+
+      @media ($mobile-screen) {
+        width: 185px;
+        height: 271px;
+        line-height: 271px;
+      }
+    }
   }
 
   .info-container {

@@ -2,7 +2,14 @@
 <app-loader *ngIf="showMainLoader"></app-loader>
 <div *ngIf="allLoaded"  class="details-container">
   <div class="poster-container">
-    <img [src]="posterBasicUrl + movie.poster_path" alt="Plakat filmowy" />
+    <img [src]="posterBasicUrl + movie.poster_path" alt="Plakat filmowy"
+    *ngIf="movie.poster_path !== null; else showPosterPlaceholder" />
+
+    <ng-template #showPosterPlaceholder>
+      <div class="poster-placeholder">
+        Brak plakatu
+      </div>
+    </ng-template>
   </div>
   <div class="info-container">
       <h2> {{ movie.title }} </h2>

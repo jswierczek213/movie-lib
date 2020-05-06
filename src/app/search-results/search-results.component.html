@@ -1,0 +1,34 @@
+<app-search-bar></app-search-bar>
+<app-loader *ngIf="showLoader"></app-loader>
+<div class="main-container">
+  <h2>Wyniki wyszukiwania</h2>
+  <div class="results-container">
+    <h3>Filmy</h3>
+    <mat-divider></mat-divider>
+    <div class="items-container" *ngIf="movies.length > 0; else showNoMoviesResults">
+      <div class="item" *ngFor="let movie of movies">
+        <div class="poster-container">
+          <img [src]="'https://image.tmdb.org/t/p/w154' + movie.poster_path" alt="Plakat filmowy"
+          *ngIf="movie.poster_path !== null; else showPosterPlaceholder" />
+
+          <ng-template #showPosterPlaceholder>
+            <div class="poster-placeholder">
+              Brak plakatu
+            </div>
+          </ng-template>
+        </div>
+
+        <div class="basic-info-container">
+          <h4 [routerLink]="['/movie', movie.id]"> {{ movie.title }} </h4>
+          <div class="rating-container">
+            <span>Ocena ogólna</span>
+            <div class="score"> {{ movie.vote_average }} </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <ng-template #showNoMoviesResults>
+      <p class="no-results">Brak wyników wyszukiwania</p>
+    </ng-template>
+  </div>
+</div>

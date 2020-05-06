@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-search-bar',
@@ -8,7 +9,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class SearchBarComponent implements OnInit {
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder, private router: Router) { }
 
   searchForm: FormGroup;
   submitted = false;
@@ -27,7 +28,10 @@ export class SearchBarComponent implements OnInit {
 
   submit(): void {
     this.enableErrors = true;
-    // Send query below
+
+    if (this.searchForm.valid) {
+      this.router.navigate(['/search-results', this.searchForm.value.query]);
+    }
   }
 
 }
