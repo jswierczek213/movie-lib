@@ -84,6 +84,22 @@
   </div>
 </div>
 <div class="additional-info">
+  <div class="video-container">
+    <h3>Filmy</h3>
+    <button *ngIf="showMoviesButton"  (click)="loadMovies()" mat-stroked-button>Wyświetl</button>
+    <app-loader *ngIf="showVideoLoader"></app-loader>
+    <div *ngIf="movieVideos.length > 0" >
+      <div class="item-container" *ngFor="let video of movieVideos | slice:0:maxMoviesCount">
+        <h4> {{ video.name }} </h4>
+        <iframe width="560" height="315" [src]="'https://www.youtube.com/embed/' + video.key | safe" allowfullscreen>
+        </iframe>
+      </div>
+      <div *ngIf="movieVideos.length > maxMoviesCount">
+        <p>Wyświetlić pozostałe {{ movieVideos.length - maxMoviesCount }} filmy?</p>
+        <a (click)="loadMoreVideos()">Wyświetl</a>
+      </div>
+    </div>
+  </div>
   <div class="cast-container">
     <h3>Obsada</h3>
     <button *ngIf="showCastButton" (click)="loadCast()" mat-stroked-button>Wyświetl</button>
@@ -98,22 +114,6 @@
           </div>
         </ng-template>
         <h4> {{ person.name }} </h4>
-      </div>
-    </div>
-  </div>
-  <div class="video-container">
-    <h3>Filmy</h3>
-    <button *ngIf="showMoviesButton"  (click)="loadMovies()" mat-stroked-button>Wyświetl</button>
-    <app-loader *ngIf="showVideoLoader"></app-loader>
-    <div *ngIf="movieVideos.length > 0" >
-      <div class="item-container" *ngFor="let video of movieVideos | slice:0:maxMoviesCount">
-        <h4> {{ video.name }} </h4>
-        <iframe width="560" height="315" [src]="'https://www.youtube.com/embed/' + video.key | safe" allowfullscreen>
-        </iframe>
-      </div>
-      <div *ngIf="movieVideos.length > maxMoviesCount">
-        <p>Wyświetlić pozostałe {{ movieVideos.length - maxMoviesCount }} filmy?</p>
-        <a (click)="loadMoreVideos()">Wyświetl</a>
       </div>
     </div>
   </div>
