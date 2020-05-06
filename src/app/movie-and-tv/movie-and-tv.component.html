@@ -1,0 +1,59 @@
+<app-search-bar></app-search-bar>
+<div class="trending-container">
+  <div class="today">
+    <h2>Popularne dzisiaj</h2>
+    <mat-divider></mat-divider>
+    <div class="movies-list">
+      <app-loader *ngIf="showDailyMoviesLoader"></app-loader>
+
+      <mat-card class="item-container" *ngFor="let movie of dailyTrendingMovies | slice:0:maxDailyMovies">
+        <img [src]="'https://image.tmdb.org/t/p/w500' + movie.backdrop_path"
+        alt="Obrazek przedstawiający film" mat-card-image />
+        <mat-card-content class="basic-info-container">
+          <h3> {{ movie.title }} </h3>
+          <div class="rating-container">
+            <span>Ocena ogólna</span>
+            <div class="score"> {{ movie.vote_average }} </div>
+          </div>
+        </mat-card-content>
+        <mat-card-actions class="btn-container">
+          <a [routerLink]="['/movie', movie.id]" [title]="'Szczegóły filmu ' + movie.title">Więcej szczegółów</a>
+        </mat-card-actions>
+      </mat-card>
+
+    </div>
+    <ng-container *ngIf="maxDailyMovies < 20">
+      <div class="load-btn-container">
+        <button mat-raised-button (click)="showMoreDailyMovies()">Pokaż więcej</button>
+      </div>
+    </ng-container>
+  </div>
+  <div class="week">
+    <h2>Popularne w tym tygodniu</h2>
+    <mat-divider></mat-divider>
+    <div class="movies-list">
+      <app-loader *ngIf="showWeeklyMoviesLoader"></app-loader>
+
+      <mat-card class="item-container" *ngFor="let movie of weeklyTrendingMovies | slice:0:maxWeeklyMovies">
+        <img [src]="'https://image.tmdb.org/t/p/w500' + movie.backdrop_path"
+        alt="Obrazek przedstawiający film" mat-card-image />
+        <mat-card-content class="basic-info-container">
+          <h3> {{ movie.title }} </h3>
+          <div class="rating-container">
+            <span>Ocena ogólna</span>
+            <div class="score"> {{ movie.vote_average }} </div>
+          </div>
+        </mat-card-content>
+        <mat-card-actions class="btn-container">
+          <a [routerLink]="['/movie', movie.id]" [title]="'Szczegóły filmu ' + movie.title">Więcej szczegółów</a>
+        </mat-card-actions>
+      </mat-card>
+
+    </div>
+    <ng-container *ngIf="maxWeeklyMovies < 20">
+      <div class="load-btn-container">
+        <button mat-raised-button (click)="showMoreWeeklyMovies()">Pokaż więcej</button>
+      </div>
+    </ng-container>
+  </div>
+</div>

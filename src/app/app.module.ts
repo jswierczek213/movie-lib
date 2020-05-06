@@ -17,6 +17,7 @@ import { SearchBarComponent } from './search-bar/search-bar.component';
 import { LoaderComponent } from './loader/loader.component';
 import { MovieDetailsComponent } from './movie-details/movie-details.component';
 import { SafePipe } from './safe.pipe';
+import { MoviesAndTvComponent } from './movie-and-tv/movie-and-tv.component';
 
 
 @NgModule({
@@ -26,7 +27,8 @@ import { SafePipe } from './safe.pipe';
     SearchBarComponent,
     LoaderComponent,
     MovieDetailsComponent,
-    SafePipe
+    SafePipe,
+    MoviesAndTvComponent
   ],
   imports: [
     BrowserModule,

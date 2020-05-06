@@ -1,0 +1,90 @@
+@import "../../assets/styles/variables.scss";
+
+.trending-container {
+  width: 100%;
+  padding: 25px 15px;
+
+  .today, .week {
+    width: 100%;
+    margin: 35px 0;
+
+    h2 {
+      margin-bottom: 7px;
+    }
+
+    .movies-list {
+      width: 100%;
+      margin-top: 10px;
+      display: flex;
+      justify-content: space-around;
+      flex-flow: row wrap;
+
+      .item-container {
+        width: 300px;
+        margin: 10px 0;
+        background-color: $dark-background;
+        color: $light-font;
+        position: relative;
+
+        .basic-info-container {
+          padding: 0px 10px 15px 10px;
+
+          h3 {
+            height: 50px;
+            margin-bottom: 0;
+          }
+
+          .rating-container {
+            margin: 15px 0;
+            display: flex;
+            justify-content: space-around;
+            flex-flow: row wrap;
+            align-items: center;
+
+            span {
+              margin: 0 15px;
+            }
+
+            .score {
+              width: 50px;
+              height: 50px;
+              padding: 10px;
+              border-radius: 50%;
+              border: 1px solid $score;
+              color: $score;
+              font-size: 20px;
+              line-height: 30px;
+              text-align: center;
+            }
+          }
+        }
+
+        .btn-container {
+          display: block;
+          text-align: right;
+          position: absolute;
+          bottom: 30px;
+          left: 0;
+          width: 100%;
+          padding-right: 15px;
+
+          a {
+            color: $score;
+            font-size: 14px;
+            cursor: pointer;
+            text-decoration: none;
+
+            &:hover {
+              filter: brightness(80%);
+            }
+          }
+        }
+      }
+    }
+
+    div.load-btn-container {
+      text-align: right;
+      padding: 15px 20px 15px 0;
+    }
+  }
+}
