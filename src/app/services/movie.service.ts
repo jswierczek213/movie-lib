@@ -13,10 +13,6 @@ export class MovieService {
   apiKey = environment.apiKey;
   basicUrl = 'https://api.themoviedb.org/3';
 
-  getTrendingToday() {
-    return this.http.get(`${this.basicUrl}/trending/movie/day?api_key=${this.apiKey}&language=pl`);
-  }
-
   getTrendingThisWeek() {
     return this.http.get(`${this.basicUrl}/trending/movie/week?api_key=${this.apiKey}&language=pl`);
   }
