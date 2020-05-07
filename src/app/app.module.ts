@@ -20,6 +20,8 @@ import { SafePipe } from './safe.pipe';
 import { MoviesAndTvComponent } from './movies-and-tv/movies-and-tv.component';
 import { SearchResultsComponent } from './search-results/search-results.component';
 import { SearchService } from './services/search.service';
+import { TvService } from './services/tv.service';
+import { TvDetailsComponent } from './tv-details/tv-details.component';
 
 
 @NgModule({
@@ -31,7 +33,8 @@ import { SearchService } from './services/search.service';
     MovieDetailsComponent,
     SafePipe,
     MoviesAndTvComponent,
-    SearchResultsComponent
+    SearchResultsComponent,
+    TvDetailsComponent
   ],
   imports: [
     BrowserModule,
@@ -43,7 +46,8 @@ import { SearchService } from './services/search.service';
   ],
   providers: [
     MovieService,
-    SearchService
+    SearchService,
+    TvService
   ],
   bootstrap: [AppComponent]
 })

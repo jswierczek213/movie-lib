@@ -2,6 +2,7 @@
 <app-loader *ngIf="showLoader"></app-loader>
 <div class="main-container">
   <h2>Wyniki wyszukiwania</h2>
+
   <div class="results-container">
     <h3>Filmy</h3>
     <mat-divider></mat-divider>
@@ -9,9 +10,9 @@
       <div class="item" *ngFor="let movie of movies | slice:0:maxMoviesCount">
         <div class="poster-container">
           <img [src]="'https://image.tmdb.org/t/p/w154' + movie.poster_path" alt="Plakat filmowy"
-          *ngIf="movie.poster_path !== null; else showPosterPlaceholder" [routerLink]="['/movie', movie.id]" />
+          *ngIf="movie.poster_path !== null; else showMoviePosterPlaceholder" [routerLink]="['/movie', movie.id]" />
 
-          <ng-template #showPosterPlaceholder>
+          <ng-template #showMoviePosterPlaceholder>
             <div class="poster-placeholder">
               Brak plakatu
             </div>
@@ -31,6 +32,39 @@
       </div>
     </div>
     <ng-template #showNoMoviesResults>
+      <p class="no-results">Brak wyników wyszukiwania</p>
+    </ng-template>
+  </div>
+
+  <div class="results-container">
+    <h3>Seriale</h3>
+    <mat-divider></mat-divider>
+    <div class="items-container" *ngIf="tv.length > 0; else showNoTvResults">
+      <div class="item" *ngFor="let tv of tv | slice:0:maxTvCount">
+        <div class="poster-container">
+          <img [src]="'https://image.tmdb.org/t/p/w154' + tv.poster_path" alt="Plakat filmowy"
+          *ngIf="tv.poster_path !== null; else showTvPosterPlaceholder" [routerLink]="['/tv', tv.id]" />
+
+          <ng-template #showTvPosterPlaceholder>
+            <div class="poster-placeholder">
+              Brak plakatu
+            </div>
+          </ng-template>
+        </div>
+
+        <div class="basic-info-container">
+          <h4 [routerLink]="['/tv', tv.id]"> {{ tv.name }} </h4>
+          <div class="rating-container">
+            <span>Ocena ogólna</span>
+            <div class="score"> {{ tv.vote_average }} </div>
+          </div>
+        </div>
+      </div>
+      <div class="load-more-container" *ngIf="maxTvCount < tv.length">
+        <a (click)="showAllTv()">Wyświetl pozostałe {{ tv.length - maxTvCount }} wyniki</a>
+      </div>
+    </div>
+    <ng-template #showNoTvResults>
       <p class="no-results">Brak wyników wyszukiwania</p>
     </ng-template>
   </div>

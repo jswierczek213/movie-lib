@@ -15,6 +15,7 @@ export class SearchResultsComponent implements OnInit {
 
   results: Array<any>;
   maxMoviesCount = 2;
+  maxTvCount = 2;
 
   movies: Array<any>;
   tv: Array<any>;
@@ -50,6 +51,10 @@ export class SearchResultsComponent implements OnInit {
 
   showAllMovies() {
     this.maxMoviesCount = this.movies.length;
+  }
+
+  showAllTv() {
+    this.maxTvCount = this.tv.length;
   }
 
 }

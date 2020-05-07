@@ -3,7 +3,7 @@
   <div class="week">
     <h2>Popularne filmy w tym tygodniu</h2>
     <mat-divider></mat-divider>
-    <div class="movies-list">
+    <div class="list-container">
       <app-loader *ngIf="showWeeklyMoviesLoader"></app-loader>
 
       <mat-card class="item-container" *ngFor="let movie of weeklyTrendingMovies | slice:0:maxWeeklyMovies">
@@ -25,6 +25,35 @@
     <ng-container *ngIf="maxWeeklyMovies < 20">
       <div class="load-btn-container">
         <button mat-raised-button (click)="showMoreWeeklyMovies()">Pokaż więcej</button>
+      </div>
+    </ng-container>
+  </div>
+
+  <div class="week">
+    <h2>Popularne seriale w tym tygodniu</h2>
+    <mat-divider></mat-divider>
+    <div class="list-container">
+      <app-loader *ngIf="showWeeklyTvLoader"></app-loader>
+
+      <mat-card class="item-container" *ngFor="let tv of weeklyTrendingTv | slice:0:maxWeeklyTv">
+        <img [src]="'https://image.tmdb.org/t/p/w500' + tv.backdrop_path"
+        alt="Obrazek przedstawiający film" mat-card-image />
+        <mat-card-content class="basic-info-container">
+          <h3> {{ tv.name }} </h3>
+          <div class="rating-container">
+            <span>Ocena ogólna</span>
+            <div class="score"> {{ tv.vote_average }} </div>
+          </div>
+        </mat-card-content>
+        <mat-card-actions class="btn-container">
+          <a [routerLink]="['/tv', tv.id]" [title]="'Szczegóły serialu ' + tv.name">Więcej szczegółów</a>
+        </mat-card-actions>
+      </mat-card>
+
+    </div>
+    <ng-container *ngIf="maxWeeklyTv < 20">
+      <div class="load-btn-container">
+        <button mat-raised-button (click)="showMoreWeeklyTv()">Pokaż więcej</button>
       </div>
     </ng-container>
   </div>
