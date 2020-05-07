@@ -6,7 +6,7 @@
     <h3>Filmy</h3>
     <mat-divider></mat-divider>
     <div class="items-container" *ngIf="movies.length > 0; else showNoMoviesResults">
-      <div class="item" *ngFor="let movie of movies">
+      <div class="item" *ngFor="let movie of movies | slice:0:maxMoviesCount">
         <div class="poster-container">
           <img [src]="'https://image.tmdb.org/t/p/w154' + movie.poster_path" alt="Plakat filmowy"
           *ngIf="movie.poster_path !== null; else showPosterPlaceholder" />
@@ -25,6 +25,9 @@
             <div class="score"> {{ movie.vote_average }} </div>
           </div>
         </div>
+      </div>
+      <div class="load-more-container" *ngIf="maxMoviesCount < movies.length">
+        <a (click)="showAllMovies()">Wyświetl pozostałe {{ movies.length - maxMoviesCount }} wyniki</a>
       </div>
     </div>
     <ng-template #showNoMoviesResults>

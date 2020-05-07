@@ -15,7 +15,7 @@ export class SearchService {
   getSearchResults(query: string) {
     const safeQuery = encodeURI(query);
     return this.http.get(
-      `${this.basicUrl}/search/multi?api_key=${this.apiKey}&language=pl&query=${safeQuery}&page=1&include_adult=true`
+      `${this.basicUrl}/search/multi?api_key=${this.apiKey}&language=pl&query=${safeQuery}&page=1&include_adult=false`
     );
   }
 }

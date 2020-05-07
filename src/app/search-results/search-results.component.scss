@@ -110,5 +110,17 @@
         }
       }
     }
+
+    .load-more-container {
+      width: 100%;
+      padding: 15px 0;
+      text-align: center;
+
+      a {
+        color: $score;
+        text-decoration: underline;
+        cursor: pointer;
+      }
+    }
   }
 }

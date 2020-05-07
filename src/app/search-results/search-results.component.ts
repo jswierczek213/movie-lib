@@ -14,6 +14,7 @@ export class SearchResultsComponent implements OnInit {
   constructor(private searchService: SearchService, private route: ActivatedRoute) { }
 
   results: Array<any>;
+  maxMoviesCount = 2;
 
   movies: Array<any>;
   tv: Array<any>;
@@ -45,6 +46,10 @@ export class SearchResultsComponent implements OnInit {
     this.tv = this.results.filter((data) => data.media_type === 'tv');
 
     this.persons = this.results.filter((data) => data.media_type === 'person');
+  }
+
+  showAllMovies() {
+    this.maxMoviesCount = this.movies.length;
   }
 
 }
