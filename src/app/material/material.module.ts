@@ -8,7 +8,8 @@ import {
   MatInputModule,
   MatCardModule,
   MatTabsModule,
-  MatListModule
+  MatListModule,
+  MatMenuModule
 } from '@angular/material';
 
 const material = [
@@ -20,7 +21,8 @@ const material = [
   MatInputModule,
   MatCardModule,
   MatTabsModule,
-  MatListModule
+  MatListModule,
+  MatMenuModule
 ];
 
 @NgModule({

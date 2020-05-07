@@ -3,4 +3,54 @@
 div.main-container {
   width: 100%;
   background-color: $dark-background;
+  color: $light-font;
+  padding: 15px 10px;
+
+  @media ($mobile-screen) {
+    padding: 15px 5px;
+  }
+
+  .nav-bar {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-flow: row nowrap;
+
+    .nav-item {
+      width: 100px;
+      background-color: $score;
+      color: $dark-font;
+      padding: 5px 0;
+      text-align: center;
+      cursor: pointer;
+      margin: 5px 10px;
+      outline: none;
+      font-size: 14px;
+
+      &:first-child {
+        margin: 5px 10px 5px 0;
+      }
+
+      &:last-child {
+        margin: 5px 0 5px 10px;
+      }
+
+      @media ($mobile-screen) {
+        margin: 5px;
+        padding: 3px 0;
+
+        &:first-child {
+          margin: 5px 5px 5px 0;
+        }
+
+        &:last-child {
+          margin: 5px 0 5px 5px;
+        }
+      }
+    }
+
+    .selected {
+      background-color: $hover-font;
+    }
+  }
 }

@@ -46,7 +46,7 @@
 
           img {
             width: 154px;
-            border: 1px solid $score;
+            border: 1px groove $score;
             cursor: pointer;
 
             &:hover {
