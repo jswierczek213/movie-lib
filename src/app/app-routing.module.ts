@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { MovieDetailsComponent } from './movie-details/movie-details.component';
-import { MoviesAndTvComponent } from './movie-and-tv/movie-and-tv.component';
+import { MoviesAndTvComponent } from './movies-and-tv/movies-and-tv.component';
 import { SearchResultsComponent } from './search-results/search-results.component';
 
 

@@ -5,8 +5,8 @@ import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-movies-and-tv',
-  templateUrl: './movie-and-tv.component.html',
-  styleUrls: ['./movie-and-tv.component.scss']
+  templateUrl: './movies-and-tv.component.html',
+  styleUrls: ['./movies-and-tv.component.scss']
 })
 export class MoviesAndTvComponent implements OnInit {
 

@@ -9,7 +9,7 @@
       <div class="item" *ngFor="let movie of movies | slice:0:maxMoviesCount">
         <div class="poster-container">
           <img [src]="'https://image.tmdb.org/t/p/w154' + movie.poster_path" alt="Plakat filmowy"
-          *ngIf="movie.poster_path !== null; else showPosterPlaceholder" />
+          *ngIf="movie.poster_path !== null; else showPosterPlaceholder" [routerLink]="['/movie', movie.id]" />
 
           <ng-template #showPosterPlaceholder>
             <div class="poster-placeholder">

@@ -35,7 +35,7 @@
         flex-flow: row wrap;
 
         .poster-container {
-          width: 154px;
+          width: 164px;
           padding: 10px 0 10px 10px;
 
           @media ($mobile-screen) {
@@ -47,6 +47,11 @@
           img {
             width: 154px;
             border: 1px solid $score;
+            cursor: pointer;
+
+            &:hover {
+              filter: brightness(80%);
+            }
           }
 
           .poster-placeholder {
@@ -62,7 +67,7 @@
         }
 
         .basic-info-container {
-          width: 246px;
+          width: 236px;
           padding: 10px;
           color: $light-font;
 

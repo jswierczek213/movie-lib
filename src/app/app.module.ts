@@ -17,7 +17,7 @@ import { SearchBarComponent } from './search-bar/search-bar.component';
 import { LoaderComponent } from './loader/loader.component';
 import { MovieDetailsComponent } from './movie-details/movie-details.component';
 import { SafePipe } from './safe.pipe';
-import { MoviesAndTvComponent } from './movie-and-tv/movie-and-tv.component';
+import { MoviesAndTvComponent } from './movies-and-tv/movies-and-tv.component';
 import { SearchResultsComponent } from './search-results/search-results.component';
 import { SearchService } from './services/search.service';
 
