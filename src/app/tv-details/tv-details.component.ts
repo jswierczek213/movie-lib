@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { TvService } from '../services/tv.service';
 import { ActivatedRoute } from '@angular/router';
-import { finalize } from 'rxjs/operators';
 import { HttpErrorResponse } from '@angular/common/http';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-tv-details',
@@ -16,7 +16,6 @@ export class TvDetailsComponent implements OnInit {
   tv: any;
   tvId: number;
 
-  showMainLoader = false;
   allLoaded = false;
   notFound = false;
 
@@ -24,11 +23,7 @@ export class TvDetailsComponent implements OnInit {
     const id = this.route.snapshot.paramMap.get('id');
     this.tvId = parseInt(id, 10);
 
-    this.tvService.getTvById(this.tvId).pipe(
-      finalize(() => {
-        this.showMainLoader = false;
-      })
-    ).subscribe(
+    this.tvService.getTvById(this.tvId).subscribe(
       (result) => {
         this.tv = result;
       },
@@ -38,7 +33,7 @@ export class TvDetailsComponent implements OnInit {
       },
       () => {
         this.allLoaded = true;
-        console.log(this.tv);
+        this.tvService.sendNewTvData(this.tv);
       }
     );
   }

@@ -22,6 +22,8 @@ import { SearchResultsComponent } from './search-results/search-results.componen
 import { SearchService } from './services/search.service';
 import { TvService } from './services/tv.service';
 import { TvDetailsComponent } from './tv-details/tv-details.component';
+import { InfoComponent } from './tv-details/info/info.component';
+import { DescriptionComponent } from './tv-details/description/description.component';
 
 
 @NgModule({
@@ -34,7 +36,9 @@ import { TvDetailsComponent } from './tv-details/tv-details.component';
     SafePipe,
     MoviesAndTvComponent,
     SearchResultsComponent,
-    TvDetailsComponent
+    TvDetailsComponent,
+    InfoComponent,
+    DescriptionComponent
   ],
   imports: [
     BrowserModule,

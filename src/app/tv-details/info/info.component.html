@@ -1,0 +1,61 @@
+<app-loader *ngIf="tv === undefined"></app-loader>
+<main *ngIf="tv !== undefined">
+  <div class="info-container">
+    <div class="title-container">
+      <h2> {{ tv.name }} </h2>
+      <h4> Oryginalny tytuł: {{ tv.original_name }} </h4>
+    </div>
+    <div class="item">
+      <span>Liczba sezonów</span>
+      <span class="value"> {{ tv.number_of_seasons }} </span>
+    </div>
+    <div class="item">
+      <span>Liczba odcinków</span>
+      <span class="value"> {{ tv.number_of_episodes }} </span>
+    </div>
+    <div class="item">
+      <span>Data pierwszej publikacji</span>
+      <span class="value"> {{ tv.first_air_date }} </span>
+    </div>
+    <div class="item">
+      <span>Data ostatniej publikacji</span>
+      <span class="value"> {{ tv.last_air_date }} </span>
+    </div>
+    <div class="item">
+      <span>Czas odcinka</span>
+      <span class="value"> {{ tv.episode_run_time }} minut </span>
+    </div>
+    <div class="item">
+      <span>Zakończony</span>
+      <span class="value" *ngIf="tv.in_production; else showInProductionInfo" > Nie </span>
+      <ng-template #showInProductionInfo>
+        <span class="value"> Tak </span>
+      </ng-template>
+    </div>
+    <div class="item">
+      <span>Gatunki</span>
+      <div class="values-list">
+        <span class="value" *ngFor="let genre of tv.genres" > {{ genre.name }} </span>
+      </div>
+    </div>
+    <div class="item">
+      <span>Twórcy</span>
+      <div class="values-list">
+        <span class="value" *ngFor="let person of tv.created_by" > {{ person.name }} </span>
+      </div>
+    </div>
+    <div class="item">
+      <span>Firmy produkcyjne</span>
+      <div class="values-list">
+        <span class="value" *ngFor="let companie of tv.production_companies" > {{ companie.name }} </span>
+      </div>
+    </div>
+    <div class="item">
+      <span>Popularność</span>
+      <span class="value"> {{ tv.popularity }} </span>
+    </div>
+  </div>
+  <div class="poster-container">
+    <img [src]="'https://image.tmdb.org/t/p/w185' + tv.poster_path" />
+  </div>
+</main>
