@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TvService } from '../services/tv.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
-import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-tv-details',
@@ -11,7 +10,11 @@ import { map } from 'rxjs/operators';
 })
 export class TvDetailsComponent implements OnInit {
 
-  constructor(private tvService: TvService, private route: ActivatedRoute) { }
+  constructor(
+    private tvService: TvService,
+    private route: ActivatedRoute,
+    private router: Router
+  ) { }
 
   tv: any;
   tvId: number;

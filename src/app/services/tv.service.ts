@@ -1,25 +1,26 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
-import { Observable, BehaviorSubject, Subject } from 'rxjs';
+import { Observable, BehaviorSubject, Subject, ReplaySubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TvService {
 
-  constructor(private http: HttpClient) {
-    this.tvData = this.tvDataSubject.asObservable();
-  }
+  constructor(private http: HttpClient) {}
 
   apiKey = environment.apiKey;
   basicUrl = 'https://api.themoviedb.org/3';
 
-  tvData: Observable<any>;
-  private tvDataSubject = new Subject<any>();
+  tvData = new ReplaySubject();
 
   sendNewTvData(data: any) {
-    this.tvDataSubject.next(data);
+    this.tvData.next(data);
+  }
+
+  getTvData() {
+    return this.tvData.asObservable();
   }
 
   getTrendingThisWeek() {
