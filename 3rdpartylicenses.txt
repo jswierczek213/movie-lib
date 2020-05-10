@@ -91,6 +91,8 @@ THE SOFTWARE.
 
 @angular/material/divider
 
+@angular/material/expansion
+
 @angular/material/icon
 
 @angular/material/sidenav
