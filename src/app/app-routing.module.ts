@@ -7,11 +7,12 @@ import { SearchResultsComponent } from './search-results/search-results.componen
 import { TvDetailsComponent } from './tv-details/tv-details.component';
 import { InfoComponent } from './tv-details/info/info.component';
 import { DescriptionComponent } from './tv-details/description/description.component';
+import { SeasonsComponent } from './tv-details/seasons/seasons.component';
+import { RatingComponent } from './tv-details/rating/rating.component';
 
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
-  {path: 'home', redirectTo: '/', pathMatch: 'full'},
   {path: 'movies-and-tv', component: MoviesAndTvComponent},
   {path: 'movie/:id', component: MovieDetailsComponent},
   {
@@ -20,7 +21,9 @@ const routes: Routes = [
     children: [
       {path: '', redirectTo: 'info', pathMatch: 'full'},
       {path: 'info', component: InfoComponent},
-      {path: 'description', component: DescriptionComponent}
+      {path: 'description', component: DescriptionComponent},
+      {path: 'seasons', component: SeasonsComponent},
+      {path: 'rating', component: RatingComponent}
     ]
   },
   {path: 'search-results/:query', component: SearchResultsComponent}

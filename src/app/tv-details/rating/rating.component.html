@@ -1,0 +1,15 @@
+<app-loader *ngIf="tv === undefined" ></app-loader>
+<main *ngIf="tv !== undefined" >
+  <div class="rating-container">
+    <div class="average-container">
+      <h4>Średnia ocen</h4>
+      <div>
+        <div class="score"> {{ tv.vote_average }} </div>
+      </div>
+    </div>
+    <div class="count-container">
+      <h4>Ilość oddanych głosów</h4>
+      <span> {{ tv.vote_count }} </span>
+    </div>
+  </div>
+</main>

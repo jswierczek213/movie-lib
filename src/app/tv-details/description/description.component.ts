@@ -13,7 +13,7 @@ export class DescriptionComponent implements OnInit, OnDestroy {
   constructor(private tvService: TvService) { }
 
   tv: any;
-  tvSubcription;
+  tvSubscription;
 
   overviewEng: string;
 
@@ -21,7 +21,7 @@ export class DescriptionComponent implements OnInit, OnDestroy {
   showDescription = true;
 
   ngOnInit() {
-    this.tvSubcription = this.tvService.tvData.subscribe(
+    this.tvSubscription = this.tvService.tvData.subscribe(
       (data) => this.tv = data,
       (error) => console.error(error)
     );
@@ -48,7 +48,7 @@ export class DescriptionComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.tvSubcription.unsubscribe();
+    this.tvSubscription.unsubscribe();
   }
 
 }

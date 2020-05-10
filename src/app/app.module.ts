@@ -24,6 +24,8 @@ import { TvService } from './services/tv.service';
 import { TvDetailsComponent } from './tv-details/tv-details.component';
 import { InfoComponent } from './tv-details/info/info.component';
 import { DescriptionComponent } from './tv-details/description/description.component';
+import { SeasonsComponent } from './tv-details/seasons/seasons.component';
+import { RatingComponent } from './tv-details/rating/rating.component';
 
 
 @NgModule({
@@ -38,7 +40,9 @@ import { DescriptionComponent } from './tv-details/description/description.compo
     SearchResultsComponent,
     TvDetailsComponent,
     InfoComponent,
-    DescriptionComponent
+    DescriptionComponent,
+    SeasonsComponent,
+    RatingComponent
   ],
   imports: [
     BrowserModule,

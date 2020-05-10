@@ -2,11 +2,11 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { TvService } from 'src/app/services/tv.service';
 
 @Component({
-  selector: 'app-info',
-  templateUrl: './info.component.html',
-  styleUrls: ['./info.component.scss']
+  selector: 'app-rating',
+  templateUrl: './rating.component.html',
+  styleUrls: ['./rating.component.scss']
 })
-export class InfoComponent implements OnInit, OnDestroy {
+export class RatingComponent implements OnInit, OnDestroy {
 
   constructor(private tvService: TvService) { }
 

@@ -3,8 +3,8 @@
   <div class="nav-bar">
     <div class="nav-item" [routerLink]="'/tv/' + tvId + '/info'" routerLinkActive="selected">Informacje</div>
     <div class="nav-item" [routerLink]="'/tv/' + tvId + '/description'" routerLinkActive="selected">Opis</div>
-    <div class="nav-item">Sezony</div>
-    <div class="nav-item">Ocena</div>
+    <div class="nav-item" [routerLink]="'/tv/' + tvId + '/seasons'" routerLinkActive="selected">Sezony</div>
+    <div class="nav-item" [routerLink]="'/tv/' + tvId + '/rating'" routerLinkActive="selected">Ocena</div>
   </div>
   <div class="content-container">
     <router-outlet></router-outlet>

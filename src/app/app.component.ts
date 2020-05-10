@@ -11,7 +11,7 @@ export class AppComponent implements DoCheck {
 
   isSmallScreen: boolean;
   links = [
-    {title: 'Strona główna', link: '/home'},
+    {title: 'Strona główna', link: '/'},
     {title: 'Filmy i seriale', link: '/movies-and-tv'},
     {title: 'Aktorzy', link: ''},
     {title: 'O nas', link: ''}

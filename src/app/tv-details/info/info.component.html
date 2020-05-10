@@ -27,10 +27,7 @@
     </div>
     <div class="item">
       <span>Zakończony</span>
-      <span class="value" *ngIf="tv.in_production; else showInProductionInfo" > Nie </span>
-      <ng-template #showInProductionInfo>
-        <span class="value"> Tak </span>
-      </ng-template>
+      <span class="value"> {{ tv.in_production ? 'Nie' : 'Tak' }} </span>
     </div>
     <div class="item">
       <span>Gatunki</span>
