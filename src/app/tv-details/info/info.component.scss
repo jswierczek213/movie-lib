@@ -33,7 +33,7 @@ main {
 
       h4 {
         font-style: italic;
-        margin: 0 0 7px 0;
+        margin: 0 0 10px 0;
       }
     }
 
@@ -69,6 +69,10 @@ main {
   .poster-container {
     width: 189px;
     order: 1;
+
+    @media (max-width: 940px) {
+      margin-bottom: 10px;
+    }
 
     img {
       display: block;

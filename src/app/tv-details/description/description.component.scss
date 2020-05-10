@@ -1,0 +1,38 @@
+@import "../../../assets/styles/variables.scss";
+
+main {
+  width: 100%;
+  padding: 20px 15px;
+
+  .description {
+    color: $light-font;
+    font-style: justify;
+    text-align: left;
+    line-height: 28px;
+    font-size: 16px;
+
+    @media ($mobile-screen) {
+      font-style: normal;
+      font-size: 15px;
+      line-height: 25px;
+    }
+
+    div {
+      text-align: center;
+
+      p {
+        margin-bottom: 7px;
+      }
+
+      a {
+        color: $score;
+        text-decoration: underline;
+        cursor: pointer;
+
+        &:hover {
+          color: $hover-font;
+        }
+      }
+    }
+  }
+}

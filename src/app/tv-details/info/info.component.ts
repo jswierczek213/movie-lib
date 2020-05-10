@@ -15,9 +15,7 @@ export class InfoComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.tvSubcription = this.tvService.tvData.subscribe(
-      (data) => {
-        this.tv = data;
-      },
+      (data) => this.tv = data,
       (error) => console.error(error)
     );
   }
