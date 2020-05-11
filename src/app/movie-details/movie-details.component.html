@@ -116,7 +116,7 @@
             <mat-icon>face</mat-icon>
           </div>
         </ng-template>
-        <h4> {{ person.name }} </h4>
+        <h4 [routerLink]="['/person', person.id]"> {{ person.name }} </h4>
       </div>
     </div>
   </div>

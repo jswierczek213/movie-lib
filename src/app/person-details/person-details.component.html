@@ -4,7 +4,54 @@
 <app-loader *ngIf="showLoader"></app-loader>
 
 <!-- Display person details -->
-<main *ngIf="!notFound"></main>
+<main *ngIf="person">
+  <div class="basic-info-container">
+    <div class="profile-pic-container">
+      <img [src]="'https://image.tmdb.org/t/p/w185' + person.profile_path" alt="Zdjęcie profilowe"
+      *ngIf="person.profile_path; else showPicPlaceholder" />
+      <ng-template #showPicPlaceholder>
+        <div class="profile-pic-placeholder"> Brak zdjęcia </div>
+      </ng-template>
+    </div>
+    <div class="basic-info">
+      <h2> {{ person.name }} </h2>
+      <p>Data urodzenia: {{ person.birthday ? (person.birthday | date: 'dd-MM-yyyy') : 'Brak danych' }}</p>
+      <p *ngIf="person.deathday" >Data śmierci: {{ person.deathday | date: 'dd-MM-yyyy' }}</p>
+    </div>
+  </div>
+  <div class="additional-info">
+    <div class="info">
+      <h4>Miejsce urodzenia</h4>
+      <p> {{ person.place_of_birth ? person.place_of_birth : 'Brak danych' }} </p>
+    </div>
+    <div class="info">
+      <h4>Biografia</h4>
+      <p>
+        {{ person.biography ? person.biography : 'Brak polskiej wersji' }}
+        <br *ngIf="!person.biography" />
+        <a *ngIf="!person.biography" (click)="loadEnglishBio()">Wyświetl wersję angielską</a>
+      </p>
+    </div>
+    <div class="info">
+      <h4>Popularność</h4>
+      <p> {{ person.popularity ? person.popularity : 'Brak danych' }} </p>
+    </div>
+    <div class="info">
+      <h4>Filmy</h4>
+      <div class="movie-list" *ngIf="moviesList && moviesList.length > 0" >
+        <ol>
+          <li *ngFor="let movie of moviesList | slice:0:maxListItemCount">
+            <h4 class="movie-title" [routerLink]="['/movie', movie.id]"> {{ movie.title }} </h4>
+            <p> Zagrał jako: <span> {{ movie.character ? movie.character : 'Brak danych' }} </span> </p>
+          </li>
+        </ol>
+        <div *ngIf="maxListItemCount < moviesList.length">
+          <a (click)="showAllMovies()">Wyświetl pozostałe {{ moviesList.length - maxListItemCount }} filmy</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
 
 <!-- Display if ID do not match any person -->
 <main *ngIf="notFound">

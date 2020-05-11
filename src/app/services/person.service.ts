@@ -15,4 +15,12 @@ export class PersonService {
   getPersonById(id: number) {
     return this.http.get(`${this.basicUrl}/person/${id}?api_key=${this.apiKey}&language=pl`);
   }
+
+  getEnglishBio(id: number) {
+    return this.http.get(`${this.basicUrl}/person/${id}/translations?api_key=${this.apiKey}`);
+  }
+
+  getMovieList(id: number) {
+    return this.http.get(`${this.basicUrl}/person/${id}/movie_credits?api_key=${this.apiKey}&language=pl`);
+  }
 }
