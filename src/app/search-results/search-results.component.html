@@ -1,6 +1,6 @@
 <app-search-bar></app-search-bar>
 <app-loader *ngIf="showLoader"></app-loader>
-<div class="main-container">
+<div class="main-container" *ngIf="results !== undefined" >
   <h2>Wyniki wyszukiwania</h2>
 
   <div class="results-container">
@@ -65,6 +65,39 @@
       </div>
     </div>
     <ng-template #showNoTvResults>
+      <p class="no-results">Brak wyników wyszukiwania</p>
+    </ng-template>
+  </div>
+
+  <div class="results-container">
+    <h3>Aktorzy</h3>
+    <mat-divider></mat-divider>
+    <div class="items-container" *ngIf="persons.length > 0; else showNoPersonsResults">
+      <div class="item" *ngFor="let person of persons | slice:0:maxPersonsCount">
+        <div class="profile-container">
+          <img [src]="'https://image.tmdb.org/t/p/w185' + person.profile_path" alt="Zdjęcie profilowe"
+          *ngIf="person.profile_path !== null; else showPersonProfilePlaceholder" [routerLink]="['/person', person.id]" />
+
+          <ng-template #showPersonProfilePlaceholder>
+            <div class="profile-placeholder">
+              Brak zdjęcia
+            </div>
+          </ng-template>
+        </div>
+
+        <div class="basic-info-container person">
+          <h4 [routerLink]="['/person', person.id]"> {{ person.name }} </h4>
+          <div class="popularity-container">
+            <span>Popularność</span>
+            <div class="popularity"> {{ person.popularity }} </div>
+          </div>
+        </div>
+      </div>
+      <div class="load-more-container" *ngIf="maxPersonsCount < persons.length">
+        <a (click)="showAllPersons()">Wyświetl pozostałe {{ persons.length - maxPersonsCount }} wyniki</a>
+      </div>
+    </div>
+    <ng-template #showNoPersonsResults>
       <p class="no-results">Brak wyników wyszukiwania</p>
     </ng-template>
   </div>

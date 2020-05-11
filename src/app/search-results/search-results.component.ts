@@ -14,8 +14,9 @@ export class SearchResultsComponent implements OnInit {
   constructor(private searchService: SearchService, private route: ActivatedRoute) { }
 
   results: Array<any>;
-  maxMoviesCount = 2;
-  maxTvCount = 2;
+  maxMoviesCount: number;
+  maxTvCount: number;
+  maxPersonsCount: number;
 
   movies: Array<any>;
   tv: Array<any>;
@@ -29,6 +30,10 @@ export class SearchResultsComponent implements OnInit {
   }
 
   loadResults(query) {
+    this.maxMoviesCount = 2;
+    this.maxTvCount = 2;
+    this.maxPersonsCount = 2;
+
     this.searchService.getSearchResults(query)
     .pipe(
       map((data: any) => data.results),
@@ -55,6 +60,10 @@ export class SearchResultsComponent implements OnInit {
 
   showAllTv() {
     this.maxTvCount = this.tv.length;
+  }
+
+  showAllPersons() {
+    this.maxPersonsCount = this.persons.length;
   }
 
 }
