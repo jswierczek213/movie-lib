@@ -9,6 +9,7 @@ import { InfoComponent } from './tv-details/info/info.component';
 import { DescriptionComponent } from './tv-details/description/description.component';
 import { SeasonsComponent } from './tv-details/seasons/seasons.component';
 import { RatingComponent } from './tv-details/rating/rating.component';
+import { PersonDetailsComponent } from './person-details/person-details.component';
 
 
 const routes: Routes = [
@@ -26,6 +27,7 @@ const routes: Routes = [
       {path: 'rating', component: RatingComponent}
     ]
   },
+  {path: 'person/:id', component: PersonDetailsComponent},
   {path: 'search-results/:query', component: SearchResultsComponent}
 ];
 

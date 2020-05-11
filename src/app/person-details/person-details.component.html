@@ -1,0 +1,15 @@
+<app-search-bar></app-search-bar>
+
+<!-- Display loader if necessary -->
+<app-loader *ngIf="showLoader"></app-loader>
+
+<!-- Display person details -->
+<main *ngIf="!notFound"></main>
+
+<!-- Display if ID do not match any person -->
+<main *ngIf="notFound">
+  <div class="not-found">
+    <h2>Nie znaleziono aktora o podanym id</h2>
+    <p>Sprawdź adres URL i spróbuj ponownie</p>
+  </div>
+</main>

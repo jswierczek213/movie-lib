@@ -1,0 +1,32 @@
+@import "../../assets/styles/variables.scss";
+
+main {
+  width: 100%;
+  padding: 20px 15px;
+
+  @media ($mobile-screen) {
+    padding: 15px 5px;
+  }
+
+  /* Styles for not found elements below */
+  .not-found {
+    width: 100%;
+    text-align: center;
+
+    h2 {
+      color: $warning;
+
+      @media ($mobile-screen) {
+        font-size: 17px;
+      }
+    }
+
+    p {
+      color: $dark-font;
+
+      @media ($mobile-screen) {
+        font-size: 14px;
+      }
+    }
+  }
+}

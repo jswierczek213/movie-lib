@@ -26,6 +26,7 @@ import { InfoComponent } from './tv-details/info/info.component';
 import { DescriptionComponent } from './tv-details/description/description.component';
 import { SeasonsComponent } from './tv-details/seasons/seasons.component';
 import { RatingComponent } from './tv-details/rating/rating.component';
+import { PersonDetailsComponent } from './person-details/person-details.component';
 
 
 @NgModule({
@@ -42,7 +43,8 @@ import { RatingComponent } from './tv-details/rating/rating.component';
     InfoComponent,
     DescriptionComponent,
     SeasonsComponent,
-    RatingComponent
+    RatingComponent,
+    PersonDetailsComponent
   ],
   imports: [
     BrowserModule,
