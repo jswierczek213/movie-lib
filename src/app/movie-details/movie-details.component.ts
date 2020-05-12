@@ -26,6 +26,7 @@ export class MovieDetailsComponent implements OnInit, DoCheck {
   movieId: number;
   maxMoviesCount = 3;
   englishDescription: string;
+  reviewsList: Array<any>;
 
   showMainLoader = false;
   showCastLoader = false;
@@ -35,6 +36,7 @@ export class MovieDetailsComponent implements OnInit, DoCheck {
   notFound = false;
   showCastButton = true;
   showMoviesButton = true;
+  displayReviews = false;
 
   ngOnInit() {
     this.showMainLoader = true;
@@ -57,15 +59,22 @@ export class MovieDetailsComponent implements OnInit, DoCheck {
         this.allLoaded = true;
       }
     );
+
+    this.movieService.getReviews(this.movieId)
+    .pipe(
+      map((data: any) => data.results)
+    )
+    .subscribe(
+      (results) => this.reviewsList = results,
+      (error: HttpErrorResponse) => console.error(error)
+    );
   }
 
   ngDoCheck() {
     if (this.breakpointObserver.isMatched('(max-width: 768px)')) {
       this.posterBasicUrl = 'http://image.tmdb.org/t/p/w185';
-      // this.profileImageBasicUrl = 'http://image.tmdb.org/t/p/w45';
     } else {
       this.posterBasicUrl = 'http://image.tmdb.org/t/p/w300';
-      // this.profileImageBasicUrl = 'http://image.tmdb.org/t/p/w185';
     }
   }
 
@@ -83,6 +92,7 @@ export class MovieDetailsComponent implements OnInit, DoCheck {
     .subscribe(
       (cast) => {
         this.movieCast = cast;
+        console.log(cast);
       },
       (error: HttpErrorResponse) => {
         console.error(error);
@@ -139,6 +149,10 @@ export class MovieDetailsComponent implements OnInit, DoCheck {
         this.movie.overview = this.englishDescription;
       }
     );
+  }
+
+  showReviews() {
+    this.displayReviews = true;
   }
 
 }

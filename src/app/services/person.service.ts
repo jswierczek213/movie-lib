@@ -23,4 +23,8 @@ export class PersonService {
   getMovieList(id: number) {
     return this.http.get(`${this.basicUrl}/person/${id}/movie_credits?api_key=${this.apiKey}&language=pl`);
   }
+
+  getTvList(id: number) {
+    return this.http.get(`${this.basicUrl}/person/${id}/tv_credits?api_key=${this.apiKey}&language=pl`);
+  }
 }

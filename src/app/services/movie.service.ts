@@ -38,4 +38,8 @@ export class MovieService {
   getMovieVideoInfo(id: number) {
     return this.http.get(`${this.basicUrl}/movie/${id}/videos?api_key=${this.apiKey}`);
   }
+
+  getReviews(id: number) {
+    return this.http.get(`${this.basicUrl}/movie/${id}/reviews?api_key=${this.apiKey}`);
+  }
 }

@@ -19,7 +19,9 @@ export class PersonDetailsComponent implements OnInit {
   personId: number;
   person: any;
   moviesList: Array<any>;
-  maxListItemCount = 5;
+  tvList: Array<any>;
+  maxMovieItemCount = 5;
+  maxTvItemCount = 5;
 
   showLoader: boolean;
   notFound: boolean;
@@ -44,7 +46,10 @@ export class PersonDetailsComponent implements OnInit {
         console.error(error);
         this.notFound = true;
       },
-      () => this.loadMovieList()
+      () => {
+        this.loadMovieList();
+        this.loadTvList();
+      }
     );
   }
 
@@ -54,7 +59,19 @@ export class PersonDetailsComponent implements OnInit {
       map((data: any) => data.cast)
     )
     .subscribe(
-      (result) => this.moviesList = result
+      (result) => this.moviesList = result,
+      (error: HttpErrorResponse) => console.error(error)
+    );
+  }
+
+  loadTvList() {
+    this.personService.getTvList(this.personId)
+    .pipe(
+      map((data: any) => data.cast)
+    )
+    .subscribe(
+      (result) => this.tvList = result,
+      (error: HttpErrorResponse) => console.error(error)
     );
   }
 
@@ -76,7 +93,11 @@ export class PersonDetailsComponent implements OnInit {
   }
 
   showAllMovies() {
-    this.maxListItemCount = this.moviesList.length;
+    this.maxMovieItemCount = this.moviesList.length;
+  }
+
+  showAllTv() {
+    this.maxTvItemCount = this.tvList.length;
   }
 
 }

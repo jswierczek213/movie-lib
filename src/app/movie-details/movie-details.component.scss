@@ -154,6 +154,7 @@
   width: 100%;
   background-color: $dark-background;
   padding-bottom: 15px;
+  border-bottom: 1px solid $light-background;
   color: $light-font;
   display: flex;
   justify-content: space-between;
@@ -185,7 +186,6 @@
 
       .item {
         width: 205px;
-        height: 360px;
         margin-top: 20px;
         text-align: center;
 
@@ -197,20 +197,31 @@
 
         h4 {
           font-style: normal;
-          color: $light-font;
+          color: $score;
           cursor: pointer;
+          margin-bottom: 7px;
 
           &:hover {
             color: $hover-font;
           }
         }
 
+        p {
+          font-size: 13px;
+          margin: 0;
+        }
+
         img {
           width: 185px;
           margin: 0 auto;
+          cursor: pointer;
 
           @media ($mobile-screen) {
             width: 150px;
+          }
+
+          &:hover {
+            filter: brightness(80%);
           }
         }
 
@@ -287,6 +298,43 @@
         text-decoration: underline;
         cursor: pointer;
       }
+    }
+  }
+}
+
+.reviews-container {
+  display: block;
+  width: 100%;
+  padding: 15px;
+  background-color: $dark-background;
+  color: $light-font;
+
+  h3 {
+    text-align: center;
+  }
+
+  .review {
+    width: 100%;
+    padding: 0 15px;
+    margin: 15px 0;
+
+    @media ($mobile-screen) {
+      padding: 0 5px;
+    }
+
+    .author {
+      width: 100%;
+      padding: 5px 0;
+      color: $score;
+    }
+
+    .content {
+      width: 100%;
+      padding: 5px 0;
+      font-size: 15px;
+      line-height: 24px;
+      text-align: justify;
+      overflow: hidden;
     }
   }
 }

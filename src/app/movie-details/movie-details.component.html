@@ -110,16 +110,33 @@
     <div class="list-container" *ngIf="movieCast.length > 0" >
       <div class="item" *ngFor="let person of movieCast" >
         <img *ngIf="person.profile_path !== null; else showImagePlaceholder"
-        [src]="profileImageBasicUrl + person.profile_path"/>
+        [src]="profileImageBasicUrl + person.profile_path"
+        [routerLink]="['/person', person.id]" />
         <ng-template #showImagePlaceholder>
           <div class="image-placeholder">
             <mat-icon>face</mat-icon>
           </div>
         </ng-template>
         <h4 [routerLink]="['/person', person.id]"> {{ person.name }} </h4>
+        <p> {{ person.character }} </p>
       </div>
     </div>
   </div>
+</div>
+<div class="reviews-container" *ngIf="reviewsList && reviewsList.length > 0">
+  <h3>Recenzje</h3>
+  <ng-container *ngIf="!displayReviews; else loadReviews" >
+    <div style="text-align: center">
+      <p>Recenzje mogą zawierać spojlery. Wyświetlić mimo to?</p>
+      <button (click)="showReviews()" mat-stroked-button>Wyświetl</button>
+    </div>
+  </ng-container>
+  <ng-template #loadReviews>
+    <div class="review" *ngFor="let review of reviewsList | slice:0:2" >
+      <div class="author"> {{ review.author }} </div>
+      <div class="content"> {{ review.content }} </div>
+    </div>
+  </ng-template>
 </div>
 <div *ngIf="notFound" class="not-found">
   <h2>Nie znaleziono filmu o podanym ID</h2>

@@ -38,15 +38,28 @@
     </div>
     <div class="info">
       <h4>Filmy</h4>
-      <div class="movie-list" *ngIf="moviesList && moviesList.length > 0" >
+      <div class="list" *ngIf="moviesList && moviesList.length > 0" >
         <ol>
-          <li *ngFor="let movie of moviesList | slice:0:maxListItemCount">
-            <h4 class="movie-title" [routerLink]="['/movie', movie.id]"> {{ movie.title }} </h4>
+          <li *ngFor="let movie of moviesList | slice:0:maxMovieItemCount">
+            <h4 class="title" [routerLink]="['/movie', movie.id]"> {{ movie.title }} </h4>
             <p> Zagrał jako: <span> {{ movie.character ? movie.character : 'Brak danych' }} </span> </p>
           </li>
         </ol>
-        <div *ngIf="maxListItemCount < moviesList.length">
-          <a (click)="showAllMovies()">Wyświetl pozostałe {{ moviesList.length - maxListItemCount }} filmy</a>
+        <div *ngIf="maxMovieItemCount < moviesList.length">
+          <a (click)="showAllMovies()">Wyświetl pozostałe {{ moviesList.length - maxMovieItemCount }} filmy</a>
+        </div>
+      </div>
+    </div>
+    <div class="info">
+      <h4>Seriale</h4>
+      <div class="list" *ngIf="tvList && tvList.length > 0" >
+        <ol>
+          <li *ngFor="let tv of tvList | slice:0:maxTvItemCount">
+            <h4 class="title" [routerLink]="['/tv', tv.id]"> {{ tv.name }} </h4>
+          </li>
+        </ol>
+        <div *ngIf="maxTvItemCount < tvList.length">
+          <a (click)="showAllTv()">Wyświetl pozostałe {{ tvList.length - maxTvItemCount }} seriale</a>
         </div>
       </div>
     </div>
