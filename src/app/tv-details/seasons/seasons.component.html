@@ -1,27 +1,22 @@
-<app-loader *ngIf="tv === undefined" ></app-loader>
-<main *ngIf="tv !== undefined" >
-  <mat-accordion>
-    <mat-expansion-panel *ngFor="let season of tv.seasons">
-
-      <mat-expansion-panel-header>
-        <mat-panel-title>
-          {{ season.name }}
-        </mat-panel-title>
-        <mat-panel-description>
-          Szczegóły
-        </mat-panel-description>
-      </mat-expansion-panel-header>
-
-      <ng-template matExpansionPanelContent>
-        <div class="content">
-          <h3>Data emisji</h3>
-          <p> {{ season.air_date }} </p>
-          <h3>Ilość odcinków</h3>
-          <p> {{ season.episode_count }} </p>
-          <h3>Opis</h3>
-          <p> {{ season.overview.length > 0 ? season.overview : 'Brak polskiego opisu' }} </p>
-        </div>
-      </ng-template>
-    </mat-expansion-panel>
-  </mat-accordion>
+<app-loader *ngIf="seasons === undefined" ></app-loader>
+<main *ngIf="seasons !== undefined" >
+  <h1>Lista sezonów oraz dodatkowe informacje</h1>
+  <div class="season-info-container" *ngFor="let season of seasons" >
+    <span class="season-number"> {{ season.season_number }} </span>
+    <h2> {{ season.name ? season.name : 'Brak nazwy' }} </h2>
+    <mat-divider></mat-divider>
+    <div class="overview">
+      {{ season.overview ? season.overview : 'Przepraszamy, brak polskiego opisu :(' }}
+    </div>
+    <div class="episodes-info">
+      <div>
+        <span>Data publikacji:</span>
+        <span> {{ season.air_date | date:'dd-MM-yyyy' }} </span>
+      </div>
+      <div>
+        <span>Ilość odcinków:</span>
+        <span> {{ season.episode_count }} </span>
+      </div>
+    </div>
+  </div>
 </main>

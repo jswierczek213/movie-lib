@@ -4,6 +4,10 @@ main {
   width: 100%;
   padding: 20px 15px;
 
+  h1 {
+    text-align: center;
+  }
+
   .description {
     color: $light-font;
     font-style: justify;

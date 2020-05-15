@@ -1,6 +1,7 @@
 <app-loader *ngIf="tv === undefined"></app-loader>
 <main *ngIf="tv !== undefined">
-  <div class="description" *ngIf="showDescription" >
+  <h1>Opis serialu</h1>
+  <div class="description" *ngIf="showDescription">
     <p *ngIf="tv.overview.length > 0"> {{ tv.overview }} </p>
     <div *ngIf="tv.overview.length === 0">
       <p>Brak opisu w języku polskim!</p>

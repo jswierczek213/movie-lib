@@ -1,9 +1,10 @@
-import { Component, OnInit, ViewEncapsulation, DoCheck } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, DoCheck, OnDestroy } from '@angular/core';
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { ActivatedRoute } from '@angular/router';
 import { MovieService } from '../services/movie.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { finalize, map } from 'rxjs/operators';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-movie-details',
@@ -11,7 +12,7 @@ import { finalize, map } from 'rxjs/operators';
   styleUrls: ['./movie-details.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
-export class MovieDetailsComponent implements OnInit, DoCheck {
+export class MovieDetailsComponent implements OnInit, DoCheck, OnDestroy {
 
   constructor(
     private breakpointObserver: BreakpointObserver,
@@ -20,13 +21,24 @@ export class MovieDetailsComponent implements OnInit, DoCheck {
 
   posterBasicUrl = 'http://image.tmdb.org/t/p/w300';
   profileImageBasicUrl = 'http://image.tmdb.org/t/p/w185';
-  movie;
-  movieCast: Array<any> = [];
-  movieVideos: Array<any> = [];
+
   movieId: number;
-  maxMoviesCount = 3;
+  movie: any;
+  movie$: Subscription;
+
+  movieCast: Array<any> = [];
+  movieCast$: Subscription;
+
+  movieVideos: Array<any> = [];
+  movieVideos$: Subscription;
+
   englishDescription: string;
+  englishDescription$: Subscription;
+
   reviewsList: Array<any>;
+  reviewsList$: Subscription;
+
+  maxMoviesCount = 3;
 
   showMainLoader = false;
   showCastLoader = false;
@@ -43,7 +55,23 @@ export class MovieDetailsComponent implements OnInit, DoCheck {
     const id = this.route.snapshot.paramMap.get('id');
     this.movieId = parseInt(id, 10);
 
-    this.movieService.getMovieById(this.movieId).pipe(
+    // Get movie from API
+    this.loadMovieData();
+
+    // Get reviews from API
+    this.loadReviews();
+  }
+
+  ngDoCheck() {
+    if (this.breakpointObserver.isMatched('(max-width: 768px)')) {
+      this.posterBasicUrl = 'http://image.tmdb.org/t/p/w185';
+    } else {
+      this.posterBasicUrl = 'http://image.tmdb.org/t/p/w300';
+    }
+  }
+
+  loadMovieData() {
+    this.movie$ = this.movieService.getMovieById(this.movieId).pipe(
       finalize(() => {
         this.showMainLoader = false;
       })
@@ -59,30 +87,13 @@ export class MovieDetailsComponent implements OnInit, DoCheck {
         this.allLoaded = true;
       }
     );
-
-    this.movieService.getReviews(this.movieId)
-    .pipe(
-      map((data: any) => data.results)
-    )
-    .subscribe(
-      (results) => this.reviewsList = results,
-      (error: HttpErrorResponse) => console.error(error)
-    );
-  }
-
-  ngDoCheck() {
-    if (this.breakpointObserver.isMatched('(max-width: 768px)')) {
-      this.posterBasicUrl = 'http://image.tmdb.org/t/p/w185';
-    } else {
-      this.posterBasicUrl = 'http://image.tmdb.org/t/p/w300';
-    }
   }
 
   loadCast() {
     this.showCastLoader = true;
     this.showCastButton = false;
 
-    this.movieService.getMovieCast(this.movieId)
+    this.movieCast$ = this.movieService.getMovieCast(this.movieId)
     .pipe(
       map((data: any) => data.cast),
       finalize(() => {
@@ -107,7 +118,7 @@ export class MovieDetailsComponent implements OnInit, DoCheck {
     this.showVideoLoader = true;
     this.showMoviesButton = false;
 
-    this.movieService.getMovieVideoInfo(this.movieId)
+    this.movieVideos$ = this.movieService.getMovieVideoInfo(this.movieId)
     .pipe(
       map((data: any) => data.results),
       finalize(() => {
@@ -131,7 +142,7 @@ export class MovieDetailsComponent implements OnInit, DoCheck {
   loadEnglishDescription() {
     this.showDescriptionLoader = true;
 
-    this.movieService.getMovieEngDescription(this.movieId)
+    this.englishDescription$ = this.movieService.getMovieEngDescription(this.movieId)
     .pipe(
       map((result: any) => result[0].data.overview),
       finalize(() => {
@@ -151,8 +162,35 @@ export class MovieDetailsComponent implements OnInit, DoCheck {
     );
   }
 
+  loadReviews() {
+    this.reviewsList$ = this.movieService.getReviews(this.movieId)
+    .pipe(
+      map((data: any) => data.results)
+    )
+    .subscribe(
+      (results) => this.reviewsList = results,
+      (error: HttpErrorResponse) => console.error(error)
+    );
+  }
+
   showReviews() {
     this.displayReviews = true;
+  }
+
+  ngOnDestroy() {
+    this.movie$.unsubscribe();
+
+    if (this.movieCast$) {
+      this.movieCast$.unsubscribe();
+    }
+
+    if (this.movieVideos$) {
+      this.movieVideos$.unsubscribe();
+    }
+
+    if (this.reviewsList$) {
+      this.reviewsList$.unsubscribe();
+    }
   }
 
 }

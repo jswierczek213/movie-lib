@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { TvService } from 'src/app/services/tv.service';
 import { map, finalize } from 'rxjs/operators';
 import { HttpErrorResponse } from '@angular/common/http';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-description',
@@ -13,7 +14,7 @@ export class DescriptionComponent implements OnInit, OnDestroy {
   constructor(private tvService: TvService) { }
 
   tv: any;
-  tvSubscription;
+  tv$: Subscription;
 
   overviewEng: string;
 
@@ -21,7 +22,11 @@ export class DescriptionComponent implements OnInit, OnDestroy {
   showDescription = true;
 
   ngOnInit() {
-    this.tvSubscription = this.tvService.tvData.subscribe(
+    this.loadTvData();
+  }
+
+  loadTvData() {
+    this.tv$ = this.tvService.tvData.subscribe(
       (data) => this.tv = data,
       (error) => console.error(error)
     );
@@ -48,7 +53,7 @@ export class DescriptionComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.tvSubscription.unsubscribe();
+    this.tv$.unsubscribe();
   }
 
 }

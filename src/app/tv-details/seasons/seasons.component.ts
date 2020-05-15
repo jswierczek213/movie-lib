@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { TvService } from 'src/app/services/tv.service';
 import { map } from 'rxjs/operators';
-import { HttpErrorResponse } from '@angular/common/http';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-seasons',
@@ -12,20 +12,28 @@ export class SeasonsComponent implements OnInit, OnDestroy {
 
   constructor(private tvService: TvService) { }
 
-  tv: any;
-  tvSubscription;
+  seasons: Array<any>;
+  seasons$: Subscription;
 
   overviewEng: string;
 
   ngOnInit() {
-    this.tvSubscription = this.tvService.tvData.subscribe(
-      (data) => this.tv = data,
+    this.loadSeasonsData();
+  }
+
+  loadSeasonsData() {
+    this.seasons$ = this.tvService.tvData
+    .pipe(
+      map((data: any) => data.seasons)
+    )
+    .subscribe(
+      (data) => this.seasons = data,
       (error) => console.error(error)
     );
   }
 
   ngOnDestroy() {
-    this.tvSubscription.unsubscribe();
+    this.seasons$.unsubscribe();
   }
 
 }

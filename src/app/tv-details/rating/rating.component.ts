@@ -1,5 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { TvService } from 'src/app/services/tv.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-rating',
@@ -11,17 +12,21 @@ export class RatingComponent implements OnInit, OnDestroy {
   constructor(private tvService: TvService) { }
 
   tv: any;
-  tvSubscription;
+  tv$: Subscription;
 
   ngOnInit() {
-    this.tvSubscription = this.tvService.tvData.subscribe(
+    this.loadTvData();
+  }
+
+  loadTvData() {
+    this.tv$ = this.tvService.tvData.subscribe(
       (data) => this.tv = data,
       (error) => console.error(error)
     );
   }
 
   ngOnDestroy() {
-    this.tvSubscription.unsubscribe();
+    this.tv$.unsubscribe();
   }
 
 }
