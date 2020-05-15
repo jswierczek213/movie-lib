@@ -1,0 +1,65 @@
+@import "../../assets/styles/variables.scss";
+
+main {
+  width: 100%;
+  padding: 25px 15px;
+  background-color: $light-background;
+  color: $dark-font;
+
+  h2 {
+    margin-bottom: 7px;
+    padding-left: 15px;
+  }
+
+  .list-container {
+    width: 100%;
+
+    .list {
+      width: 100%;
+      display: flex;
+      flex-flow: row wrap;
+      justify-content: space-around;
+
+      .item {
+        width: 185px;
+        min-width: 185px;
+        position: relative;
+        background-color: $dark-background;
+        color: $light-font;
+        margin: 15px 10px;
+        padding-bottom: 0;
+
+        img {
+          display: block;
+          cursor: pointer;
+          margin-bottom: 0;
+
+          &:hover {
+            filter: brightness(80%);
+          }
+        }
+
+        .content {
+          padding: 15px 0;
+
+          h3 {
+            text-align: center;
+            color: $score;
+            cursor: pointer;
+
+            &:hover {
+              color: $hover-font;
+            }
+          }
+        }
+      }
+
+      div.load-btn-container {
+        width: 100%;
+        text-align: right;
+        padding: 15px 20px 15px 0;
+      }
+
+    }
+  }
+}

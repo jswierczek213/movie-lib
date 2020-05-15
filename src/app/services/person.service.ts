@@ -27,4 +27,8 @@ export class PersonService {
   getTvList(id: number) {
     return this.http.get(`${this.basicUrl}/person/${id}/tv_credits?api_key=${this.apiKey}&language=pl`);
   }
+
+  getPopular() {
+    return this.http.get(`${this.basicUrl}/person/popular?api_key=${this.apiKey}&language=pl`);
+  }
 }

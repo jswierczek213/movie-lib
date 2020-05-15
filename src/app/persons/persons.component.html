@@ -1,0 +1,22 @@
+<app-search-bar></app-search-bar>
+<main>
+  <div class="list-container">
+    <h2>Popularni</h2>
+    <mat-divider></mat-divider>
+    <app-loader *ngIf="showPopularLoader"></app-loader>
+    <div class="list" *ngIf="popularPersons">
+      <mat-card class="item" *ngFor="let person of popularPersons | slice:0:maxPopularCount">
+        <img mat-card-image
+        [src]="'http://image.tmdb.org/t/p/w185' + person.profile_path"
+        [alt]="'Zdjęcie profilowe ' + person.name"
+        [routerLink]="['/person', person.id]" />
+        <mat-card-content class="content">
+          <h3 [routerLink]="['/person', person.id]"> {{ person.name }} </h3>
+        </mat-card-content>
+      </mat-card>
+      <div class="load-btn-container" *ngIf="maxPopularCount < popularPersons.length" >
+        <button (click)="showMorePopular()" mat-raised-button>Pokaż więcej</button>
+      </div>
+    </div>
+  </div>
+</main>

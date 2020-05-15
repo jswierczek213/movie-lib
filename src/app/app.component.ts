@@ -13,7 +13,7 @@ export class AppComponent implements DoCheck {
   links = [
     {title: 'Strona główna', link: '/'},
     {title: 'Filmy i seriale', link: '/movies-and-tv'},
-    {title: 'Aktorzy', link: ''},
+    {title: 'Aktorzy', link: '/persons'},
     {title: 'O nas', link: ''}
   ];
 

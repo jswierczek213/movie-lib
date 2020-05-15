@@ -10,6 +10,7 @@ import { DescriptionComponent } from './tv-details/description/description.compo
 import { SeasonsComponent } from './tv-details/seasons/seasons.component';
 import { RatingComponent } from './tv-details/rating/rating.component';
 import { PersonDetailsComponent } from './person-details/person-details.component';
+import { PersonsComponent } from './persons/persons.component';
 
 
 const routes: Routes = [
@@ -27,6 +28,7 @@ const routes: Routes = [
       {path: 'rating', component: RatingComponent}
     ]
   },
+  {path: 'persons', component: PersonsComponent},
   {path: 'person/:id', component: PersonDetailsComponent},
   {path: 'search-results/:query', component: SearchResultsComponent}
 ];

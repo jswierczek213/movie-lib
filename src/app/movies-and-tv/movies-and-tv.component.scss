@@ -88,3 +88,43 @@
     }
   }
 }
+
+.discover-container {
+  width: 100%;
+  background-color: $dark-background;
+  text-align: center;
+  padding: 25px 15px;
+  box-shadow: 0 -5px 15px 0px $dark-background;
+
+  h2 {
+    margin-top: 0;
+    font-size: 35px;
+    letter-spacing: 1px;
+    color: $light-font;
+  }
+
+  .discover-options {
+    width: 100%;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-items: center;
+
+    .option {
+      border-radius: 15px;
+      width: 125px;
+      padding: 20px 0;
+      margin: 0 20px;
+      text-align: center;
+      font-size: 20px;
+      border: 2px solid $light-background;
+      background-color: rgba(32, 32, 32, 0.5);
+      cursor: pointer;
+      color: $light-font;
+
+      &:hover {
+        background-color: rgba(255, 122, 34, 0.5);
+      }
+    }
+  }
+}
