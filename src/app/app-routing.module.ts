@@ -11,6 +11,7 @@ import { SeasonsComponent } from './tv-details/seasons/seasons.component';
 import { RatingComponent } from './tv-details/rating/rating.component';
 import { PersonDetailsComponent } from './person-details/person-details.component';
 import { PersonsComponent } from './persons/persons.component';
+import { DiscoverMoviesComponent } from './discover-movies/discover-movies.component';
 
 
 const routes: Routes = [
@@ -30,7 +31,8 @@ const routes: Routes = [
   },
   {path: 'persons', component: PersonsComponent},
   {path: 'person/:id', component: PersonDetailsComponent},
-  {path: 'search-results/:query', component: SearchResultsComponent}
+  {path: 'search-results/:query', component: SearchResultsComponent},
+  {path: 'discover/movies', component: DiscoverMoviesComponent}
 ];
 
 @NgModule({

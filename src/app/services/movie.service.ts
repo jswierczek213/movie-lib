@@ -42,4 +42,8 @@ export class MovieService {
   getReviews(id: number) {
     return this.http.get(`${this.basicUrl}/movie/${id}/reviews?api_key=${this.apiKey}`);
   }
+
+  getGenres() {
+    return this.http.get(`${this.basicUrl}/genre/movie/list?api_key=${this.apiKey}&language=pl`);
+  }
 }

@@ -29,6 +29,7 @@ import { RatingComponent } from './tv-details/rating/rating.component';
 import { PersonDetailsComponent } from './person-details/person-details.component';
 import { PersonsComponent } from './persons/persons.component';
 import { PersonService } from './services/person.service';
+import { DiscoverMoviesComponent } from './discover-movies/discover-movies.component';
 
 
 @NgModule({
@@ -47,7 +48,8 @@ import { PersonService } from './services/person.service';
     SeasonsComponent,
     RatingComponent,
     PersonDetailsComponent,
-    PersonsComponent
+    PersonsComponent,
+    DiscoverMoviesComponent
   ],
   imports: [
     BrowserModule,
