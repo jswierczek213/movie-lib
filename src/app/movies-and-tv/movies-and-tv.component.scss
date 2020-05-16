@@ -10,6 +10,11 @@
 
     h2 {
       margin: 0 0 7px 15px;
+
+      @media ($mobile-screen) {
+        font-size: 18px;
+        margin: 0 0 7px 5px;
+      }
     }
 
     .list-container {
