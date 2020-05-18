@@ -101,10 +101,7 @@ export class MovieDetailsComponent implements OnInit, DoCheck, OnDestroy {
       })
     )
     .subscribe(
-      (cast) => {
-        this.movieCast = cast;
-        console.log(cast);
-      },
+      (cast) => this.movieCast = cast,
       (error: HttpErrorResponse) => {
         console.error(error);
       },

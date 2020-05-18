@@ -11,6 +11,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 export class DiscoverMoviesComponent implements OnInit {
 
   constructor(private movieService: MovieService) { }
+
   genresList: Array<any>;
 
   ngOnInit() {
