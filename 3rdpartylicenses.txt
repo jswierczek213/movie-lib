@@ -89,7 +89,11 @@ THE SOFTWARE.
 
 @angular/material/card
 
+@angular/material/checkbox
+
 @angular/material/divider
+
+@angular/material/form-field
 
 @angular/material/icon
 
