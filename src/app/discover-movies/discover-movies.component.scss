@@ -4,4 +4,227 @@ main {
   width: 100%;
   padding-bottom: 20px;
   background-color: $light-background;
+
+  .options-container {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    background-color: #ffa346;
+    overflow-y: hidden;
+
+    h1 {
+      font-weight: 100;
+      text-align: center;
+    }
+
+    form {
+      width: 100%;
+      display: flex;
+      flex-flow: row wrap;
+      justify-content: space-evenly;
+
+      .option {
+        width: 200px;
+        min-width: 200px;
+        text-align: center;
+
+        label {
+          display: block;
+          margin-bottom: 10px;
+        }
+
+        select {
+          display: inline-block;
+        }
+
+        button {
+          line-height: 28px;
+        }
+
+        .genres-list {
+          margin-top: 10px;
+          display: flex;
+          flex-flow: row wrap;
+          justify-content: left;
+
+          .checkbox {
+            width: 130px;
+            margin: 3px 10px;
+            text-align: left;
+          }
+        }
+      }
+
+      .full-width {
+        width: 100%;
+
+        h3 {
+          margin-bottom: 7px;
+        }
+      }
+
+      .btn-container {
+        width: 100%;
+        padding: 20px 0;
+        text-align: center;
+
+        button {
+          background-color: $dark-background;
+          color: $light-font;
+        }
+      }
+    }
+  }
+
+  .content-container {
+    width: 100%;
+    margin-top: 10px;
+    padding-top: 10px;
+
+    .page-count {
+      width: 100%;
+      text-align: center;
+      margin-top: 0;
+    }
+
+    .item-container {
+      width: 100%;
+      background-color: $dark-background;
+      color: $light-font;
+      position: relative;
+      margin-bottom: 20px;
+      padding: 50px 10px 15px 10px;
+      display: flex;
+      flex-flow: row wrap;
+      justify-content: left;
+
+      .title {
+        font-size: 15px;
+        max-height: 42px;
+        overflow: hidden;
+        position: absolute;
+        top: 0;
+        left: 0;
+        display: inline-block;
+        line-height: 42px;
+        padding: 0 25px 0 15px;
+        background-color: #ffa346;
+        color: $dark-font;
+        letter-spacing: 2px;
+        border-right: 4px solid $score;
+        border-bottom: 4px solid $score;
+        font-weight: 500;
+
+        @media ($mobile-screen) {
+          font-size: 13px;
+          letter-spacing: 0;
+          padding: 0 10px;
+        }
+
+        &:hover {
+          border-color: $hover-font;
+          cursor: pointer;
+          filter: brightness(80%);
+        }
+      }
+
+      .poster-container {
+        width: fit-content;
+        margin-bottom: 15px;
+
+        @media ($mobile-screen) {
+          width: 100%;
+          text-align: center;
+
+          img {
+            display: inline !important;
+          }
+
+        }
+
+        span {
+          display: inline-block;
+          color: $warning;
+          width: 185px;
+          height: 282px;
+          text-align: center;
+          line-height: 282px;
+          border: 2px groove $light-background;
+          font-size: 18px;
+        }
+
+        img {
+          display: block;
+          border: 2px groove $light-background;
+
+          &:hover {
+            filter: brightness(80%);
+            cursor: pointer;
+          }
+        }
+      }
+
+      .basic-info {
+        padding: 0 20px;
+        max-width: calc(100% - 190px);
+
+        @media ($mobile-screen) {
+          width: 100%;
+          max-width: 100%;
+        }
+
+        .info {
+          width: 100%;
+          margin-bottom: 10px;
+
+          h3 {
+            margin: 0;
+          }
+
+          p {
+            color: $score;
+            padding-left: 15px;
+            margin: 10px 0 0 0;
+          }
+
+          a {
+            display: inline-block;
+            color: $score;
+            cursor: pointer;
+            margin: 10px 0 0 15px;
+            text-decoration: underline;
+
+            &:hover {
+              color: $hover-font;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .page-control-container {
+    width: 100%;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-around;
+
+    h3 {
+      width: 100%;
+      text-align: center;
+    }
+
+    button {
+      background-color: $dark-background;
+      color: $score;
+    }
+  }
+
+  .no-results {
+    width: 100%;
+    margin-top: 10px;
+    padding: 10px;
+    text-align: center;
+    color: $warning;
+  }
 }

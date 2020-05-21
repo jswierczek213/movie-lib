@@ -1,1 +1,91 @@
-<main></main>
+<main>
+  <div class="options-container">
+    <h1>Odkrywaj filmy</h1>
+    <form [formGroup]="discoverForm" novalidate autocomplete="off" (ngSubmit)="submit()">
+      <div class="option">
+        <mat-form-field>
+          <mat-label>Od roku publikacji</mat-label>
+          <select matNativeControl formControlName="primaryYear">
+            <option value="">Dowolny</option>
+            <option *ngFor="let year of availableYears" [value]="year">
+              {{ year }}
+            </option>
+          </select>
+        </mat-form-field>
+      </div>
+      <div class="option">
+        <mat-form-field>
+          <mat-label>Sortuj</mat-label>
+          <select matNativeControl formControlName="sortMethod">
+            <option value="popularity.desc">Popularność - max</option>
+            <option value="popularity.asc">Popularność - min</option>
+            <option value="release_date.desc">Data publikacji - max</option>
+            <option value="release_date.asc">Data publikacji - min</option>
+            <option value="vote_average.desc">Średnia ocen - max</option>
+            <option value="vote_average.asc">Średnia ocen - min</option>
+            <option value="vote_count.desc">Liczba głosów - max</option>
+            <option value="vote_count.asc">Liczba głosów - min</option>
+          </select>
+        </mat-form-field>
+      </div>
+      <div class="option full-width">
+        <h3>Gatunki</h3>
+        <mat-divider></mat-divider>
+        <div class="genres-list animate__animated">
+          <mat-checkbox class="checkbox" *ngFor="let genre of genresList" formArrayName="genres"
+          [value]="genre.id" (change)="onCheckboxChange($event)">
+            {{ genre.name }}
+          </mat-checkbox>
+        </div>
+      </div>
+      <div class="btn-container">
+        <button mat-stroked-button type="submit">Odkryj</button>
+      </div>
+    </form>
+  </div>
+
+  <app-loader *ngIf="visibleLoader"></app-loader>
+
+  <div class="content-container" *ngIf="moviesList.length > 0; else noResults" #content>
+    <h3 class="page-count">Strona {{ pageNumber }}</h3>
+    <div class="item-container" *ngFor="let movie of moviesList; let i = index">
+      <span class="title" [routerLink]="['/movie', movie.id]"> {{ movie.title ? movie.title : 'Brak danych' }} </span>
+      <div class="poster-container">
+        <img *ngIf="movie.poster_path !== null"
+        [src]="'https://image.tmdb.org/t/p/w185' + movie.poster_path" [routerLink]="['/movie', movie.id]" />
+        <span *ngIf="movie.poster_path === null">Brak plakatu</span>
+      </div>
+      <div class="basic-info">
+        <div class="info">
+          <h3>Data publikacji</h3>
+          <p> {{ movie.release_date ? (movie.release_date | date:'dd-MM-yyyy') : 'Brak danych' }} </p>
+        </div>
+        <div class="info">
+          <h3>Opis</h3>
+          <p *ngIf="movie.overview.length > 0" > {{ movie.overview }} </p>
+          <a *ngIf="movie.overview.length === 0" (click)="loadOverview(movie.id, i)" >Wyświetl wersję angielską</a>
+        </div>
+        <div class="info">
+          <h3>Średnia ocen</h3>
+          <p> {{ movie.vote_average ? movie.vote_average : 'Brak danych' }} </p>
+        </div>
+        <div class="info">
+          <h3>Ilość oddanych głosów</h3>
+          <p> {{ movie.vote_count ? movie.vote_count : 'Brak danych' }} </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-control-container" *ngIf="moviesList.length > 0">
+    <h3>Strona {{ pageNumber }}</h3>
+    <button mat-stroked-button (click)="prev()">Poprzednia strona</button>
+    <button mat-stroked-button (click)="next()">Następna strona</button>
+  </div>
+
+  <ng-template #noResults>
+    <div class="no-results">
+      <h2>Brak wyników</h2>
+    </div>
+  </ng-template>
+</main>

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { map } from 'rxjs/operators';
 
@@ -45,5 +45,24 @@ export class MovieService {
 
   getGenres() {
     return this.http.get(`${this.basicUrl}/genre/movie/list?api_key=${this.apiKey}&language=pl`);
+  }
+
+  discoverMovies(sort: string, genres: Array<number>, primaryReleaseYear: string, page: string) {
+    let params = new HttpParams();
+    params = params.append('api_key', this.apiKey);
+    params = params.append('language', 'pl');
+    params = params.append('sort_by', sort);
+    params = params.append('page', page);
+
+    if ((genres.length > 0) && (primaryReleaseYear.length > 0)) {
+      params = params.append('with_genres', genres.join(','));
+      params = params.append('primary_release_year', primaryReleaseYear);
+    } else if (genres.length > 0) {
+      params = params.append('with_genres', genres.join(','));
+    } else if (primaryReleaseYear.length > 0) {
+      params = params.append('primary_release_year.gte', primaryReleaseYear);
+    }
+
+    return this.http.get(`${this.basicUrl}/discover/movie`, { params });
   }
 }
