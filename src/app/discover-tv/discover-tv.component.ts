@@ -55,7 +55,7 @@ export class DiscoverTvComponent implements OnInit {
   loadAvailableYears() {
     const currentYear = new Date().getFullYear();
 
-    for (let i = 1833; i <= currentYear; i++) {
+    for (let i = currentYear; i >= 1914; i--) {
       this.availableYears.push(i);
     }
   }
