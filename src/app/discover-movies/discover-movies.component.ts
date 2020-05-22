@@ -135,6 +135,10 @@ export class DiscoverMoviesComponent implements OnInit {
 
   submit() {
     this.resetPageNumber();
+
+    const verticalOffset = this.content.nativeElement.offsetTop;
+    window.scroll(0, verticalOffset);
+
     this.discover();
   }
 

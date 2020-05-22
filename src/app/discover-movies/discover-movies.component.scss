@@ -8,7 +8,6 @@ main {
   .options-container {
     width: 100%;
     padding: 10px;
-    margin-bottom: 10px;
     background-color: #ffa346;
     overflow-y: hidden;
 
@@ -78,13 +77,12 @@ main {
 
   .content-container {
     width: 100%;
-    margin-top: 10px;
-    padding-top: 10px;
+    padding-top: 20px;
 
     .page-count {
       width: 100%;
       text-align: center;
-      margin-top: 0;
+      margin: 0 0 20px 0;
     }
 
     .item-container {
@@ -107,12 +105,12 @@ main {
         left: 0;
         display: inline-block;
         line-height: 42px;
-        padding: 0 25px 0 15px;
-        background-color: #ffa346;
+        padding: 0 15px;
+        background-color: $score;
         color: $dark-font;
         letter-spacing: 2px;
-        border-right: 4px solid $score;
-        border-bottom: 4px solid $score;
+        border-right: 4px solid #944a00;
+        border-bottom: 4px solid #944a00;
         font-weight: 500;
 
         @media ($mobile-screen) {
@@ -122,7 +120,6 @@ main {
         }
 
         &:hover {
-          border-color: $hover-font;
           cursor: pointer;
           filter: brightness(80%);
         }
@@ -135,6 +132,7 @@ main {
         @media ($mobile-screen) {
           width: 100%;
           text-align: center;
+          margin: 10px 0 15px 0;
 
           img {
             display: inline !important;
