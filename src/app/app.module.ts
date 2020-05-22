@@ -30,6 +30,7 @@ import { PersonDetailsComponent } from './person-details/person-details.componen
 import { PersonsComponent } from './persons/persons.component';
 import { PersonService } from './services/person.service';
 import { DiscoverMoviesComponent } from './discover-movies/discover-movies.component';
+import { DiscoverTvComponent } from './discover-tv/discover-tv.component';
 
 
 @NgModule({
@@ -49,7 +50,8 @@ import { DiscoverMoviesComponent } from './discover-movies/discover-movies.compo
     RatingComponent,
     PersonDetailsComponent,
     PersonsComponent,
-    DiscoverMoviesComponent
+    DiscoverMoviesComponent,
+    DiscoverTvComponent
   ],
   imports: [
     BrowserModule,

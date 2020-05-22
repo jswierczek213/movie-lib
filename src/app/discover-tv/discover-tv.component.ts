@@ -1,4 +1,4 @@
-import { MovieService } from './../services/movie.service';
+import { TvService } from './../services/tv.service';
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { map, finalize } from 'rxjs/operators';
 import { HttpErrorResponse } from '@angular/common/http';
@@ -6,12 +6,12 @@ import { FormGroup, FormBuilder, FormArray, FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-discover-movies',
-  templateUrl: './discover-movies.component.html',
-  styleUrls: ['./discover-movies.component.scss']
+  templateUrl: './discover-tv.component.html',
+  styleUrls: ['./discover-tv.component.scss']
 })
-export class DiscoverMoviesComponent implements OnInit {
+export class DiscoverTvComponent implements OnInit {
 
-  constructor(private movieService: MovieService, private fb: FormBuilder) { }
+  constructor(private tvService: TvService, private fb: FormBuilder) { }
 
   @ViewChild('content', {static: false}) content: ElementRef;
 
@@ -19,7 +19,7 @@ export class DiscoverMoviesComponent implements OnInit {
 
   availableYears: Array<number> = [];
   genresList: Array<any>;
-  moviesList: Array<any> = [];
+  tvList: Array<any> = [];
 
   totalPageCount: number;
   pageNumber: number;
@@ -41,7 +41,7 @@ export class DiscoverMoviesComponent implements OnInit {
   }
 
   getGenresList() {
-    this.movieService.getGenres()
+    this.tvService.getGenres()
     .pipe(
       map((data: any) => data.genres)
     )
@@ -61,11 +61,11 @@ export class DiscoverMoviesComponent implements OnInit {
   }
 
   loadOverview(id: number, i: number) {
-    this.movieService.getMovieEngDescription(id)
+    this.tvService.getTvEnglishDescription(id)
     .pipe(
       map((data: any) => (data.length > 0) ? data[0].data.overview : 'Brak opisu')
     )
-    .subscribe(overview => this.moviesList[i].overview = overview);
+    .subscribe(overview => this.tvList[i].overview = overview);
   }
 
   onCheckboxChange(e) {
@@ -92,13 +92,13 @@ export class DiscoverMoviesComponent implements OnInit {
     const genres = this.discoverForm.value.genres;
     const primaryYear = this.discoverForm.value.primaryYear;
 
-    this.movieService.discoverMovies(sort, genres, primaryYear, this.pageNumber.toString())
+    this.tvService.discoverTv(sort, genres, primaryYear, this.pageNumber.toString())
     .pipe(
       finalize(() => this.visibleLoader = false)
     )
     .subscribe(
       (data: any) => {
-        this.moviesList = data.results;
+        this.tvList = data.results;
         this.totalPageCount = data.total_pages;
       },
       (error: HttpErrorResponse) => console.error(error)

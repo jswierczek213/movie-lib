@@ -1,10 +1,10 @@
 <main>
   <div class="options-container">
-    <h1>Odkrywaj filmy</h1>
+    <h1>Odkrywaj seriale</h1>
     <form [formGroup]="discoverForm" novalidate autocomplete="off" (ngSubmit)="submit()">
       <div class="option">
         <mat-form-field>
-          <mat-label>Od roku publikacji</mat-label>
+          <mat-label>Od daty emisji</mat-label>
           <select matNativeControl formControlName="primaryYear">
             <option value="">Dowolny</option>
             <option *ngFor="let year of availableYears" [value]="year">
@@ -19,12 +19,10 @@
           <select matNativeControl formControlName="sortMethod">
             <option value="popularity.desc">Popularność - max</option>
             <option value="popularity.asc">Popularność - min</option>
-            <option value="release_date.desc">Data publikacji - max</option>
-            <option value="release_date.asc">Data publikacji - min</option>
+            <option value="first_air_date.desc">Pierwsza emisja - max</option>
+            <option value="first_air_date.asc">Pierwsza emisja - min</option>
             <option value="vote_average.desc">Średnia ocen - max</option>
             <option value="vote_average.asc">Średnia ocen - min</option>
-            <option value="vote_count.desc">Liczba głosów - max</option>
-            <option value="vote_count.asc">Liczba głosów - min</option>
           </select>
         </mat-form-field>
       </div>
@@ -46,38 +44,41 @@
 
   <app-loader *ngIf="visibleLoader"></app-loader>
 
-  <div class="content-container" *ngIf="moviesList.length > 0; else noResults" #content>
+  <div class="content-container" *ngIf="tvList.length > 0; else noResults" #content>
     <h3 class="page-count">Strona {{ pageNumber }}</h3>
-    <div class="item-container" *ngFor="let movie of moviesList; let i = index">
-      <span class="title" [routerLink]="['/movie', movie.id]"> {{ movie.title ? movie.title : 'Brak danych' }} </span>
+    <div class="item-container" *ngFor="let tv of tvList; let i = index">
+      <span class="title" [routerLink]="['/tv', tv.id]"> {{ tv.name ? tv.name : 'Brak danych' }} </span>
       <div class="poster-container">
-        <img *ngIf="movie.poster_path !== null"
-        [src]="'https://image.tmdb.org/t/p/w185' + movie.poster_path" [routerLink]="['/movie', movie.id]" />
-        <span *ngIf="movie.poster_path === null">Brak plakatu</span>
+        <img *ngIf="tv.poster_path !== null"
+        [src]="'https://image.tmdb.org/t/p/w185' + tv.poster_path" [routerLink]="['/tv', tv.id]" />
+        <span *ngIf="tv.poster_path === null">Brak plakatu</span>
       </div>
       <div class="basic-info">
         <div class="info">
-          <h3>Data publikacji</h3>
-          <p> {{ (movie.release_date.length === 10) ? (movie.release_date | date:'dd-MM-yyyy') : 'Brak danych' }} </p>
+          <h3>Data pierwszej emisji</h3>
+          <p>
+            {{ (tv.first_air_date.length === 10) ?
+            (tv.first_air_date | date:'dd-MM-yyyy') : 'Brak danych lub błędny format' }}
+          </p>
         </div>
         <div class="info">
           <h3>Opis</h3>
-          <p *ngIf="movie.overview.length > 0" > {{ movie.overview }} </p>
-          <a *ngIf="movie.overview.length === 0" (click)="loadOverview(movie.id, i)">Wyświetl wersję angielską</a>
+          <p *ngIf="tv.overview.length > 0" > {{ tv.overview }} </p>
+          <a *ngIf="tv.overview.length === 0" (click)="loadOverview(tv.id, i)" >Wyświetl wersję angielską</a>
         </div>
         <div class="info">
           <h3>Średnia ocen</h3>
-          <p> {{ movie.vote_average ? movie.vote_average : 'Brak danych' }} </p>
+          <p> {{ tv.vote_average ? tv.vote_average : 'Brak danych' }} </p>
         </div>
         <div class="info">
           <h3>Ilość oddanych głosów</h3>
-          <p> {{ movie.vote_count ? movie.vote_count : 'Brak danych' }} </p>
+          <p> {{ tv.vote_count ? tv.vote_count : 'Brak danych' }} </p>
         </div>
       </div>
     </div>
   </div>
 
-  <div class="page-control-container" *ngIf="moviesList.length > 0">
+  <div class="page-control-container" *ngIf="tvList.length > 0">
     <h3>Strona {{ pageNumber }}</h3>
     <button mat-stroked-button (click)="prev()">Poprzednia strona</button>
     <button mat-stroked-button (click)="next()">Następna strona</button>
