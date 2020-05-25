@@ -60,12 +60,15 @@ export class DiscoverTvComponent implements OnInit {
     }
   }
 
-  loadOverview(id: number, i: number) {
+  loadOverview(id: number, index: number) {
     this.tvService.getTvEnglishDescription(id)
     .pipe(
-      map((data: any) => (data.length > 0) ? data[0].data.overview : 'Brak opisu')
+      map((data: any) => (data.length > 0) && (data[0].data.overview.length > 0) ? data[0].data.overview : 'Brak opisu')
     )
-    .subscribe(overview => this.tvList[i].overview = overview);
+    .subscribe(
+      (overview) => this.tvList[index].overview = overview,
+      (error: HttpErrorResponse) => console.error(error)
+    );
   }
 
   onCheckboxChange(e) {

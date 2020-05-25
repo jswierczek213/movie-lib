@@ -54,11 +54,15 @@ export class TvService {
     params = params.append('page', page);
 
     if ((genres.length > 0) && (primaryReleaseYear.length > 0)) {
+      primaryReleaseYear = primaryReleaseYear + '-01-01';
+
       params = params.append('with_genres', genres.join(','));
       params = params.append('first_air_date.gte', primaryReleaseYear);
     } else if (genres.length > 0) {
       params = params.append('with_genres', genres.join(','));
     } else if (primaryReleaseYear.length > 0) {
+      primaryReleaseYear = primaryReleaseYear + '-01-01';
+
       params = params.append('first_air_date.gte', primaryReleaseYear);
     }
 
