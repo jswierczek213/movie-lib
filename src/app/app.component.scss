@@ -9,7 +9,8 @@
   align-content: center;
   background-color: $dark-background;
   color: $light-font;
-  border-bottom: 2px #3b3b3b solid;
+  border-bottom: 2px $score solid;
+  box-shadow: 0 3px 10px $score;
   position: fixed;
   top: 0;
   left: 0;

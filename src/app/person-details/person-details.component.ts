@@ -78,16 +78,10 @@ export class PersonDetailsComponent implements OnInit {
   loadEnglishBio() {
     this.personService.getEnglishBio(this.personId)
     .pipe(
-      map((result: any) => result.translations.filter(item => item.name === 'English'))
+      map((data: any) => (data.length > 0) && (data[0].data.biography.length > 0) ? data[0].data.biography : 'Brak')
     )
     .subscribe(
-      (data) => {
-        if (data.length > 0) {
-          this.person.biography = data[0].data.biography;
-        } else {
-          this.person.biography = 'Brak biografii';
-        }
-      },
+      (biography) => this.person.biography = biography,
       (error: HttpErrorResponse) => console.error(error)
     );
   }

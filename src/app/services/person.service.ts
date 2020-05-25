@@ -1,6 +1,7 @@
 import { environment } from 'src/environments/environment';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +18,13 @@ export class PersonService {
   }
 
   getEnglishBio(id: number) {
-    return this.http.get(`${this.basicUrl}/person/${id}/translations?api_key=${this.apiKey}`);
+    return this.http.get(`${this.basicUrl}/person/${id}/translations?api_key=${this.apiKey}`)
+    .pipe(
+      map((data: any) => data.translations)
+    )
+    .pipe(
+      map((translations: any) => translations.filter(item => item.name === 'English'))
+    );
   }
 
   getMovieList(id: number) {

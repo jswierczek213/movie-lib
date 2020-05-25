@@ -1,21 +1,24 @@
 import { TvService } from './../services/tv.service';
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, OnDestroy } from '@angular/core';
 import { map, finalize } from 'rxjs/operators';
 import { HttpErrorResponse } from '@angular/common/http';
 import { FormGroup, FormBuilder, FormArray, FormControl } from '@angular/forms';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-discover-movies',
   templateUrl: './discover-tv.component.html',
   styleUrls: ['./discover-tv.component.scss']
 })
-export class DiscoverTvComponent implements OnInit {
+export class DiscoverTvComponent implements OnInit, OnDestroy {
 
   constructor(private tvService: TvService, private fb: FormBuilder) { }
 
   @ViewChild('content', {static: false}) content: ElementRef;
 
   discoverForm: FormGroup;
+
+  subscriptions$: any[] = [];
 
   availableYears: Array<number> = [];
   genresList: Array<any>;
@@ -41,7 +44,7 @@ export class DiscoverTvComponent implements OnInit {
   }
 
   getGenresList() {
-    this.tvService.getGenres()
+    this.subscriptions$.push(this.tvService.getGenres()
     .pipe(
       map((data: any) => data.genres)
     )
@@ -49,7 +52,7 @@ export class DiscoverTvComponent implements OnInit {
       (results) => this.genresList = results,
       (error: HttpErrorResponse) => console.error(error),
       () => this.discover()
-    );
+    ));
   }
 
   loadAvailableYears() {
@@ -61,14 +64,14 @@ export class DiscoverTvComponent implements OnInit {
   }
 
   loadOverview(id: number, index: number) {
-    this.tvService.getTvEnglishDescription(id)
+    this.subscriptions$.push(this.tvService.getTvEnglishDescription(id)
     .pipe(
       map((data: any) => (data.length > 0) && (data[0].data.overview.length > 0) ? data[0].data.overview : 'Brak opisu')
     )
     .subscribe(
       (overview) => this.tvList[index].overview = overview,
       (error: HttpErrorResponse) => console.error(error)
-    );
+    ));
   }
 
   onCheckboxChange(e) {
@@ -95,7 +98,7 @@ export class DiscoverTvComponent implements OnInit {
     const genres = this.discoverForm.value.genres;
     const primaryYear = this.discoverForm.value.primaryYear;
 
-    this.tvService.discoverTv(sort, genres, primaryYear, this.pageNumber.toString())
+    this.subscriptions$.push(this.tvService.discoverTv(sort, genres, primaryYear, this.pageNumber.toString())
     .pipe(
       finalize(() => this.visibleLoader = false)
     )
@@ -105,7 +108,7 @@ export class DiscoverTvComponent implements OnInit {
         this.totalPageCount = data.total_pages;
       },
       (error: HttpErrorResponse) => console.error(error)
-    );
+    ));
   }
 
   resetPageNumber() {
@@ -143,6 +146,10 @@ export class DiscoverTvComponent implements OnInit {
     window.scroll(0, verticalOffset);
 
     this.discover();
+  }
+
+  ngOnDestroy() {
+    this.subscriptions$.forEach((sub: Subscription) => sub.unsubscribe());
   }
 
 }

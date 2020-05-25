@@ -13,6 +13,7 @@ import { PersonDetailsComponent } from './person-details/person-details.componen
 import { PersonsComponent } from './persons/persons.component';
 import { DiscoverMoviesComponent } from './discover-movies/discover-movies.component';
 import { DiscoverTvComponent } from './discover-tv/discover-tv.component';
+import { NotFoundComponent } from './not-found/not-found.component';
 
 
 const routes: Routes = [
@@ -34,7 +35,8 @@ const routes: Routes = [
   {path: 'person/:id', component: PersonDetailsComponent},
   {path: 'search-results/:query', component: SearchResultsComponent},
   {path: 'discover/movies', component: DiscoverMoviesComponent},
-  {path: 'discover/tv', component: DiscoverTvComponent}
+  {path: 'discover/tv', component: DiscoverTvComponent},
+  {path: '**', component: NotFoundComponent}
 ];
 
 @NgModule({

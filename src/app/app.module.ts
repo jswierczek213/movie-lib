@@ -31,6 +31,7 @@ import { PersonsComponent } from './persons/persons.component';
 import { PersonService } from './services/person.service';
 import { DiscoverMoviesComponent } from './discover-movies/discover-movies.component';
 import { DiscoverTvComponent } from './discover-tv/discover-tv.component';
+import { NotFoundComponent } from './not-found/not-found.component';
 
 
 @NgModule({
@@ -51,7 +52,8 @@ import { DiscoverTvComponent } from './discover-tv/discover-tv.component';
     PersonDetailsComponent,
     PersonsComponent,
     DiscoverMoviesComponent,
-    DiscoverTvComponent
+    DiscoverTvComponent,
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,

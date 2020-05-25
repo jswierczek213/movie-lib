@@ -1,21 +1,24 @@
 import { MovieService } from './../services/movie.service';
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, OnDestroy } from '@angular/core';
 import { map, finalize } from 'rxjs/operators';
 import { HttpErrorResponse } from '@angular/common/http';
 import { FormGroup, FormBuilder, FormArray, FormControl } from '@angular/forms';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-discover-movies',
   templateUrl: './discover-movies.component.html',
   styleUrls: ['./discover-movies.component.scss']
 })
-export class DiscoverMoviesComponent implements OnInit {
+export class DiscoverMoviesComponent implements OnInit, OnDestroy {
 
   constructor(private movieService: MovieService, private fb: FormBuilder) { }
 
   @ViewChild('content', {static: false}) content: ElementRef;
 
   discoverForm: FormGroup;
+
+  subscriptions$: any[] = [];
 
   availableYears: Array<number> = [];
   genresList: Array<any>;
@@ -41,7 +44,7 @@ export class DiscoverMoviesComponent implements OnInit {
   }
 
   getGenresList() {
-    this.movieService.getGenres()
+    this.subscriptions$.push(this.movieService.getGenres()
     .pipe(
       map((data: any) => data.genres)
     )
@@ -49,7 +52,7 @@ export class DiscoverMoviesComponent implements OnInit {
       (results) => this.genresList = results,
       (error: HttpErrorResponse) => console.error(error),
       () => this.discover()
-    );
+    ));
   }
 
   loadAvailableYears() {
@@ -61,11 +64,14 @@ export class DiscoverMoviesComponent implements OnInit {
   }
 
   loadOverview(id: number, i: number) {
-    this.movieService.getMovieEngDescription(id)
+    this.subscriptions$.push(this.movieService.getMovieEngDescription(id)
     .pipe(
-      map((data: any) => (data.length > 0) ? data[0].data.overview : 'Brak opisu')
+      map((data: any) => (data.length > 0) && (data[0].data.overview.length > 0) ? data[0].data.overview : 'Brak opisu')
     )
-    .subscribe(overview => this.moviesList[i].overview = overview);
+    .subscribe(
+      (overview) => this.moviesList[i].overview = overview,
+      (error: HttpErrorResponse) => console.error(error)
+    ));
   }
 
   onCheckboxChange(e) {
@@ -92,7 +98,7 @@ export class DiscoverMoviesComponent implements OnInit {
     const genres = this.discoverForm.value.genres;
     const primaryYear = this.discoverForm.value.primaryYear;
 
-    this.movieService.discoverMovies(sort, genres, primaryYear, this.pageNumber.toString())
+    this.subscriptions$.push(this.movieService.discoverMovies(sort, genres, primaryYear, this.pageNumber.toString())
     .pipe(
       finalize(() => this.visibleLoader = false)
     )
@@ -102,7 +108,7 @@ export class DiscoverMoviesComponent implements OnInit {
         this.totalPageCount = data.total_pages;
       },
       (error: HttpErrorResponse) => console.error(error)
-    );
+    ));
   }
 
   resetPageNumber() {
@@ -140,6 +146,10 @@ export class DiscoverMoviesComponent implements OnInit {
     window.scroll(0, verticalOffset);
 
     this.discover();
+  }
+
+  ngOnDestroy() {
+    this.subscriptions$.forEach((sub: Subscription) => sub.unsubscribe());
   }
 
 }
