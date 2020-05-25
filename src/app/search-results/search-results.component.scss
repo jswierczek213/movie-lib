@@ -2,6 +2,11 @@
 
 .main-container {
   width: 100%;
+  min-height: calc(100vh - 313px);
+
+  @media ($mobile-screen) {
+    min-height: calc(100vh - 266px);
+  }
 
   h2 {
     text-align: center;

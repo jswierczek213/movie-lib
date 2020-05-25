@@ -1,0 +1,27 @@
+@import "../../assets/styles/variables.scss";
+
+footer {
+  width: 100%;
+  padding: 5px 10px;
+  background-color: $dark-background;
+  border-top: 2px solid $score;
+
+  span {
+    display: block;
+    text-align: center;
+    margin: 10px;
+    font-weight: 100;
+  }
+
+  .title {
+    font-size: 18px;
+    letter-spacing: 1px;
+    color: $score;
+  }
+
+  .rights {
+    font-size: 14px;
+    letter-spacing: 2px;
+    color: $light-font;
+  }
+}

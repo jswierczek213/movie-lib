@@ -1,1 +1,96 @@
 @import "../../assets/styles/variables.scss";
+
+main {
+  width: 100%;
+  min-height: calc(100vh - 293px);
+  background-color: $dark-background;
+
+  .introduction {
+    width: 100%;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-around;
+
+    .logo-container {
+      width: 40%;
+      padding: 15px;
+      text-align: center;
+
+      @media ($mobile-screen) {
+        width: 100%;
+        padding: 15px 0 0 0;
+      }
+
+      img {
+        width: 60%;
+        display: block;
+        margin: 15px auto;
+
+        @media ($mobile-screen) {
+          width: 40%;
+        }
+      }
+
+      .mat-icon {
+        font-size: 30px;
+        color: $score;
+      }
+    }
+
+    .description-container {
+      padding: 15px 10px;
+      width: 60%;
+      color: $light-font;
+      font-size: 17px;
+      line-height: 25px;
+
+      @media ($mobile-screen) {
+        width: 100%;
+        padding: 15px 20px;
+      }
+
+      .important {
+        color: $score;
+      }
+
+      p {
+        margin-top: 15px;
+
+        @media ($mobile-screen) {
+          margin-top: 0;
+        }
+
+        small {
+          color: $warning;
+          display: block;
+          text-align: center;
+
+          @media ($mobile-screen) {
+            margin-top: 10px;
+          }
+        }
+
+        a {
+          text-decoration: underline;
+          color: $score;
+          font-weight: 500;
+
+          &:hover {
+            color: $hover-font;
+          }
+        }
+      }
+
+      div {
+        padding: 15px 0;
+        border-top: 1px groove $light-background;
+
+        small {
+          color: $warning;
+          display: block;
+          text-align: center;
+        }
+      }
+    }
+  }
+}
