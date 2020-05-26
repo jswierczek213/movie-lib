@@ -1,17 +1,20 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { MovieService } from '../services/movie.service';
 import { map, finalize } from 'rxjs/operators';
 import { HttpErrorResponse } from '@angular/common/http';
 import { TvService } from '../services/tv.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-movies-and-tv',
   templateUrl: './movies-and-tv.component.html',
   styleUrls: ['./movies-and-tv.component.scss']
 })
-export class MoviesAndTvComponent implements OnInit {
+export class MoviesAndTvComponent implements OnInit, OnDestroy {
 
   constructor(private movieService: MovieService, private tvService: TvService) { }
+
+  subscriptions$: any[] = [];
 
   weeklyTrendingMovies: Array<any>;
   weeklyTrendingTv: Array<any>;
@@ -31,7 +34,7 @@ export class MoviesAndTvComponent implements OnInit {
   }
 
   getWeeklyTrendingMovies() {
-    this.movieService.getTrendingThisWeek()
+    this.subscriptions$.push(this.movieService.getTrendingThisWeek()
     .pipe(
       map((data: any) => data.results),
       finalize(() => {
@@ -41,11 +44,11 @@ export class MoviesAndTvComponent implements OnInit {
     .subscribe(
       (result) => this.weeklyTrendingMovies = result,
       (error: HttpErrorResponse) => console.error(error)
-    );
+    ));
   }
 
   getWeeklyTrendingTv() {
-    this.tvService.getTrendingThisWeek()
+    this.subscriptions$.push(this.tvService.getTrendingThisWeek()
     .pipe(
       map((data: any) => data.results),
       finalize(() => {
@@ -55,7 +58,7 @@ export class MoviesAndTvComponent implements OnInit {
     .subscribe(
       (data) => this.weeklyTrendingTv = data,
       (error: HttpErrorResponse) => console.error(error)
-    );
+    ));
   }
 
   showMoreWeeklyMovies() {
@@ -72,6 +75,10 @@ export class MoviesAndTvComponent implements OnInit {
     } else {
       this.maxWeeklyTv = 20;
     }
+  }
+
+  ngOnDestroy() {
+    this.subscriptions$.forEach((sub: Subscription) => sub.unsubscribe());
   }
 
 }

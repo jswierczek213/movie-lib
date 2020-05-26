@@ -1,4 +1,6 @@
 <main>
+
+  <!-- Discover form container -->
   <div class="options-container">
     <h1>Odkrywaj seriale</h1>
     <form [formGroup]="discoverForm" novalidate autocomplete="off" (ngSubmit)="submit()">
@@ -44,8 +46,9 @@
 
   <app-loader *ngIf="visibleLoader"></app-loader>
 
+  <!-- Discover results container -->
   <div class="content-container" *ngIf="tvList.length > 0; else noResults" #content>
-    <h3 class="page-count">Strona {{ pageNumber }}</h3>
+    <h3 class="page-count">Strona {{ pageNumber }} / {{ totalPageCount }}</h3>
     <div class="item-container" *ngFor="let tv of tvList; let i = index">
       <span class="title" [routerLink]="['/tv', tv.id]"> {{ tv.name ? tv.name : 'Brak danych' }} </span>
       <div class="poster-container">
@@ -78,8 +81,9 @@
     </div>
   </div>
 
+  <!-- Buttons to navigate between pages -->
   <div class="page-control-container" *ngIf="tvList.length > 0">
-    <h3>Strona {{ pageNumber }}</h3>
+    <h3>Strona {{ pageNumber }} / {{ totalPageCount }}</h3>
     <button mat-stroked-button (click)="prev()">Poprzednia strona</button>
     <button mat-stroked-button (click)="next()">Następna strona</button>
   </div>

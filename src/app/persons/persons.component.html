@@ -1,5 +1,8 @@
 <app-search-bar></app-search-bar>
+
 <main>
+
+  <!-- List of popular people -->
   <div class="list-container">
     <h2>Popularni</h2>
     <mat-divider></mat-divider>
@@ -14,9 +17,12 @@
           <h3 [routerLink]="['/person', person.id]"> {{ person.name }} </h3>
         </mat-card-content>
       </mat-card>
+
+      <!-- Load more people if possible -->
       <div class="load-btn-container" *ngIf="maxPopularCount < popularPersons.length" >
         <button (click)="showMorePopular()" mat-raised-button>Pokaż więcej</button>
       </div>
+
     </div>
   </div>
 </main>

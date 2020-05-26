@@ -22,21 +22,18 @@ export class MovieDetailsComponent implements OnInit, DoCheck, OnDestroy {
   posterBasicUrl = 'http://image.tmdb.org/t/p/w300';
   profileImageBasicUrl = 'http://image.tmdb.org/t/p/w185';
 
+  subscriptions$: any[] = [];
+
   movieId: number;
   movie: any;
-  movie$: Subscription;
 
   movieCast: Array<any> = [];
-  movieCast$: Subscription;
 
   movieVideos: Array<any> = [];
-  movieVideos$: Subscription;
 
   englishDescription: string;
-  englishDescription$: Subscription;
 
   reviewsList: Array<any>;
-  reviewsList$: Subscription;
 
   maxMoviesCount = 3;
 
@@ -71,7 +68,7 @@ export class MovieDetailsComponent implements OnInit, DoCheck, OnDestroy {
   }
 
   loadMovieData() {
-    this.movie$ = this.movieService.getMovieById(this.movieId).pipe(
+    this.subscriptions$.push(this.movieService.getMovieById(this.movieId).pipe(
       finalize(() => {
         this.showMainLoader = false;
       })
@@ -86,14 +83,14 @@ export class MovieDetailsComponent implements OnInit, DoCheck, OnDestroy {
       () => {
         this.allLoaded = true;
       }
-    );
+    ));
   }
 
   loadCast() {
     this.showCastLoader = true;
     this.showCastButton = false;
 
-    this.movieCast$ = this.movieService.getMovieCast(this.movieId)
+    this.subscriptions$.push(this.movieService.getMovieCast(this.movieId)
     .pipe(
       map((data: any) => data.cast),
       finalize(() => {
@@ -108,14 +105,14 @@ export class MovieDetailsComponent implements OnInit, DoCheck, OnDestroy {
       () => {
         this.allLoaded = true;
       }
-    );
+    ));
   }
 
   loadMovies() {
     this.showVideoLoader = true;
     this.showMoviesButton = false;
 
-    this.movieVideos$ = this.movieService.getMovieVideoInfo(this.movieId)
+    this.subscriptions$.push(this.movieService.getMovieVideoInfo(this.movieId)
     .pipe(
       map((data: any) => data.results),
       finalize(() => {
@@ -129,7 +126,7 @@ export class MovieDetailsComponent implements OnInit, DoCheck, OnDestroy {
       (error: HttpErrorResponse) => {
         console.error(error);
       }
-    );
+    ));
   }
 
   loadMoreVideos() {
@@ -139,7 +136,7 @@ export class MovieDetailsComponent implements OnInit, DoCheck, OnDestroy {
   loadEnglishDescription() {
     this.showDescriptionLoader = true;
 
-    this.englishDescription$ = this.movieService.getMovieEngDescription(this.movieId)
+    this.subscriptions$.push(this.movieService.getMovieEngDescription(this.movieId)
     .pipe(
       map((result: any) => result[0].data.overview),
       finalize(() => {
@@ -156,18 +153,18 @@ export class MovieDetailsComponent implements OnInit, DoCheck, OnDestroy {
       () => {
         this.movie.overview = this.englishDescription;
       }
-    );
+    ));
   }
 
   loadReviews() {
-    this.reviewsList$ = this.movieService.getReviews(this.movieId)
+    this.subscriptions$.push(this.movieService.getReviews(this.movieId)
     .pipe(
       map((data: any) => data.results)
     )
     .subscribe(
       (results) => this.reviewsList = results,
       (error: HttpErrorResponse) => console.error(error)
-    );
+    ));
   }
 
   showReviews() {
@@ -175,19 +172,7 @@ export class MovieDetailsComponent implements OnInit, DoCheck, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.movie$.unsubscribe();
-
-    if (this.movieCast$) {
-      this.movieCast$.unsubscribe();
-    }
-
-    if (this.movieVideos$) {
-      this.movieVideos$.unsubscribe();
-    }
-
-    if (this.reviewsList$) {
-      this.reviewsList$.unsubscribe();
-    }
+    this.subscriptions$.forEach((sub: Subscription) => sub.unsubscribe());
   }
 
 }

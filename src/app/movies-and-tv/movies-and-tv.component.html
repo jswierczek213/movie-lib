@@ -1,5 +1,9 @@
 <app-search-bar></app-search-bar>
+
+<!-- Trending movies and tv shows container -->
 <div class="trending-container">
+
+  <!-- Popular movies for week -->
   <div class="week">
     <h2>Popularne filmy w tym tygodniu</h2>
     <mat-divider></mat-divider>
@@ -22,13 +26,17 @@
       </mat-card>
 
     </div>
+
+    <!-- Load more movies if possible -->
     <ng-container *ngIf="maxWeeklyMovies < 20">
       <div class="load-btn-container">
         <button mat-raised-button (click)="showMoreWeeklyMovies()">Pokaż więcej</button>
       </div>
     </ng-container>
+
   </div>
 
+  <!-- Popular tv shows for week -->
   <div class="week">
     <h2>Popularne seriale w tym tygodniu</h2>
     <mat-divider></mat-divider>
@@ -51,13 +59,18 @@
       </mat-card>
 
     </div>
+
+    <!-- Load more tv shows if possible -->
     <ng-container *ngIf="maxWeeklyTv < 20">
       <div class="load-btn-container">
         <button mat-raised-button (click)="showMoreWeeklyTv()">Pokaż więcej</button>
       </div>
     </ng-container>
+
   </div>
 </div>
+
+<!-- Discover links container -->
 <div class="discover-container">
   <h2>ODKRYWAJ</h2>
   <div class="discover-options">

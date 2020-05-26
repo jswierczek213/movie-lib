@@ -1,6 +1,8 @@
 <app-search-bar></app-search-bar>
 <app-loader *ngIf="showMainLoader"></app-loader>
 <div *ngIf="allLoaded"  class="details-container">
+
+  <!-- Movie's poster -->
   <div class="poster-container">
     <img [src]="posterBasicUrl + movie.poster_path" alt="Plakat filmowy"
     *ngIf="movie.poster_path !== null; else showPosterPlaceholder" />
@@ -11,10 +13,14 @@
       </div>
     </ng-template>
   </div>
+
+  <!-- About movie container -->
   <div class="info-container">
       <h2> {{ movie.title }} </h2>
       <h4> {{ movie.original_title }} </h4>
       <mat-tab-group mat-align-tabs="center" dynamicHeight="true">
+
+        <!-- Basic informations -->
         <mat-tab label="Informacje">
           <div class="content-container">
             <div>
@@ -55,6 +61,8 @@
             </div>
           </div>
         </mat-tab>
+
+        <!-- Description -->
         <mat-tab label="Opis">
           <div class="content-container">
             <p class="description" *ngIf="movie.overview.length > 0; else showNoPolishDescription">
@@ -69,6 +77,8 @@
             </ng-template>
           </div>
         </mat-tab>
+
+        <!-- Vote average and vote count -->
         <mat-tab label="Ocena">
           <div class="content-container">
             <div>
@@ -83,10 +93,15 @@
             </div>
           </div>
         </mat-tab>
+
       </mat-tab-group>
   </div>
 </div>
+
+<!-- More info -->
 <div class="additional-info">
+
+  <!-- Youtube iframes -->
   <div class="video-container">
     <h3>Filmy</h3>
     <button *ngIf="showMoviesButton"  (click)="loadMovies()" mat-stroked-button>Wyświetl</button>
@@ -103,6 +118,8 @@
       </div>
     </div>
   </div>
+
+  <!-- Cast -->
   <div class="cast-container">
     <h3>Obsada</h3>
     <button *ngIf="showCastButton" (click)="loadCast()" mat-stroked-button>Wyświetl</button>
@@ -122,7 +139,10 @@
       </div>
     </div>
   </div>
+
 </div>
+
+<!-- Reviews container -->
 <div class="reviews-container" *ngIf="reviewsList && reviewsList.length > 0">
   <h3>Recenzje</h3>
   <ng-container *ngIf="!displayReviews; else loadReviews" >

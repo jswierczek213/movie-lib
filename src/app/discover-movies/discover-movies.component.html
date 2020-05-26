@@ -1,4 +1,5 @@
 <main>
+  <!-- Discover form container -->
   <div class="options-container">
     <h1>Odkrywaj filmy</h1>
     <form [formGroup]="discoverForm" novalidate autocomplete="off" (ngSubmit)="submit()">
@@ -46,8 +47,9 @@
 
   <app-loader *ngIf="visibleLoader"></app-loader>
 
+  <!-- Discover results container -->
   <div class="content-container" *ngIf="moviesList.length > 0; else noResults" #content>
-    <h3 class="page-count">Strona {{ pageNumber }}</h3>
+    <h3 class="page-count">Strona {{ pageNumber }} / {{ totalPageCount }}</h3>
     <div class="item-container" *ngFor="let movie of moviesList; let i = index">
       <span class="title" [routerLink]="['/movie', movie.id]"> {{ movie.title ? movie.title : 'Brak danych' }} </span>
       <div class="poster-container">
@@ -77,8 +79,9 @@
     </div>
   </div>
 
+  <!-- Buttons to navigate between pages -->
   <div class="page-control-container" *ngIf="moviesList.length > 0">
-    <h3>Strona {{ pageNumber }}</h3>
+    <h3>Strona {{ pageNumber }} / {{ totalPageCount }}</h3>
     <button mat-stroked-button (click)="prev()">Poprzednia strona</button>
     <button mat-stroked-button (click)="next()">Następna strona</button>
   </div>

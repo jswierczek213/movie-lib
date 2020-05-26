@@ -6,6 +6,8 @@
 <!-- Display person details -->
 <main *ngIf="person">
   <div class="basic-info-container">
+
+    <!-- Profile picture -->
     <div class="profile-pic-container">
       <img [src]="'https://image.tmdb.org/t/p/w185' + person.profile_path" alt="Zdjęcie profilowe"
       *ngIf="person.profile_path; else showPicPlaceholder" />
@@ -13,12 +15,17 @@
         <div class="profile-pic-placeholder"> Brak zdjęcia </div>
       </ng-template>
     </div>
+
+    <!-- Basic informations -->
     <div class="basic-info">
       <h2> {{ person.name }} </h2>
       <p>Data urodzenia: {{ person.birthday ? (person.birthday | date: 'dd-MM-yyyy') : 'Brak danych' }}</p>
       <p *ngIf="person.deathday" >Data śmierci: {{ person.deathday | date: 'dd-MM-yyyy' }}</p>
     </div>
+
   </div>
+
+  <!-- Additional informations -->
   <div class="additional-info">
     <div class="info">
       <h4>Miejsce urodzenia</h4>
@@ -64,6 +71,7 @@
       </div>
     </div>
   </div>
+  
 </main>
 
 <!-- Display if ID do not match any person -->

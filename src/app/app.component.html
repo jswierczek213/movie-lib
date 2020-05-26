@@ -8,10 +8,8 @@
       <a *ngFor="let link of links" [routerLink]="link.link">{{ link.title }}</a>
     </div>
     <ng-template #showMenuIcon>
-      <button mat-icon-button
-      (click)="sidenav.toggle()"
-      [ngClass]="{'rotate90': sidenav.opened, 'rotate-back': !sidenav.opened}">
-        <mat-icon>menu</mat-icon>
+      <button mat-icon-button (click)="sidenav.toggle()">
+        <mat-icon [ngClass]="{'rotate90': sidenav.opened, 'rotate-back': !sidenav.opened}">menu</mat-icon>
       </button>
     </ng-template>
   </div>

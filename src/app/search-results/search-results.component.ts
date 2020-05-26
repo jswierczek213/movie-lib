@@ -1,17 +1,20 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { SearchService } from '../services/search.service';
 import { ActivatedRoute } from '@angular/router';
 import { map, finalize } from 'rxjs/operators';
 import { HttpErrorResponse } from '@angular/common/http';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-search-results',
   templateUrl: './search-results.component.html',
   styleUrls: ['./search-results.component.scss']
 })
-export class SearchResultsComponent implements OnInit {
+export class SearchResultsComponent implements OnInit, OnDestroy {
 
   constructor(private searchService: SearchService, private route: ActivatedRoute) { }
+
+  subscriptions$: any[] = [];
 
   results: Array<any>;
   maxMoviesCount: number;
@@ -26,7 +29,7 @@ export class SearchResultsComponent implements OnInit {
 
   ngOnInit() {
     this.showLoader = true;
-    this.route.params.subscribe(data => this.loadResults(data.query));
+    this.subscriptions$.push(this.route.params.subscribe(data => this.loadResults(data.query)));
   }
 
   loadResults(query) {
@@ -34,7 +37,7 @@ export class SearchResultsComponent implements OnInit {
     this.maxTvCount = 2;
     this.maxPersonsCount = 2;
 
-    this.searchService.getSearchResults(query)
+    this.subscriptions$.push(this.searchService.getSearchResults(query)
     .pipe(
       map((data: any) => data.results),
       finalize(() => this.showLoader = false)
@@ -43,7 +46,7 @@ export class SearchResultsComponent implements OnInit {
       (results) => this.results = results,
       (error: HttpErrorResponse) => console.error(error),
       () => this.separateArrays()
-    );
+    ));
   }
 
   separateArrays() {
@@ -64,6 +67,10 @@ export class SearchResultsComponent implements OnInit {
 
   showAllPersons() {
     this.maxPersonsCount = this.persons.length;
+  }
+
+  ngOnDestroy() {
+    this.subscriptions$.forEach((sub: Subscription) => sub.unsubscribe());
   }
 
 }

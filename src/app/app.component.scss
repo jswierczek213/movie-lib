@@ -10,7 +10,7 @@
   background-color: $dark-background;
   color: $light-font;
   border-bottom: 2px $score solid;
-  box-shadow: 0 3px 10px $score;
+  box-shadow: 0 1px 10px $score;
   position: fixed;
   top: 0;
   left: 0;
@@ -61,14 +61,15 @@
     }
   }
 
+
   .rotate90 {
     transform: rotate(90deg);
-    transition: all 300ms ease-in-out;
+    transition: transform 300ms ease-in-out;
   }
 
   .rotate-back {
     transform: rotate(0deg);
-    transition: all 300ms ease-in-out;
+    transition: transform 300ms ease-in-out;
   }
 }
 
@@ -103,8 +104,12 @@
     }
 
     a {
+      display: inline-block;
       color: $light-font;
       text-decoration: none;
+      border-radius: 15px;
+      border: 1px solid #ffa346;
+      padding: 15px;
 
       &:hover {
         color: $hover-font;
