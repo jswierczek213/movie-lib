@@ -104,10 +104,12 @@
     }
 
     a {
-      display: inline-block;
+      display: block;
+      width: 80%;
+      margin: 0 auto;
+      text-align: center;
       color: $light-font;
       text-decoration: none;
-      border-radius: 15px;
       border: 1px solid #ffa346;
       padding: 15px;
 
